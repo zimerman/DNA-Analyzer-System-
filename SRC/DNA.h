@@ -12,7 +12,8 @@ class DNA
 public:
     DNA(const std::string& name,const std::string& status,const std::string& dnaSeq);
     static size_t getId();
-    std::string getName()const;
+    std::string getName();
+    std::string getDnaSeq();
 private:
     DnaSequence m_Dna_seq;
     static size_t m_id;

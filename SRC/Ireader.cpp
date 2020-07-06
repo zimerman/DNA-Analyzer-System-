@@ -7,13 +7,13 @@
 KeyboardReader::KeyboardReader()
 {
     std::cout<<"enter your data\n";
-    std::cin>>m_data;
+    std::getline(std::cin, m_data);
 }
+
 std::string KeyboardReader::getData()const
 {
     return m_data;
 }
-
 
 FileReader::FileReader(const char* myfile)
 {
