@@ -6,9 +6,9 @@
 
 Icommand* ManageCommand::createCtorCommand(const ParamCommand& pharams)
 {
-    if(pharams.getParam()[0]=="new")
-    {
+    //if(pharams.getParam()[0]=="new")
+    //{
         Icommand* command = new New(pharams);
         return command;
-    }
+    //}
 }

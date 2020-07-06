@@ -5,6 +5,7 @@
 #include "System.h"
 #include "Icommand.h"
 #include "ManageCommand.h"
+#include "Ireader.h"
 
 void System::startApp()
 {

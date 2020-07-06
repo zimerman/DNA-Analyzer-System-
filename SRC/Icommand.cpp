@@ -37,13 +37,12 @@ const char* New::run(const ParamCommand& params)
         obj1 = new DNA((params.getParam())[2],"new",(params.getParam())[1]);
         DataDNA::getDataDNAidtodna().insert(std::pair<size_t,DNA*>(DNA::getId(), obj1));
         DataDNA::getDataDNAnametoid().insert(std::pair<std::string, size_t>(((params.getParam())[1]), DNA::getId()));
-        //result=obj1->getName();
     }
     std::string result2;
     std::stringstream sstm2;
-    sstm2 << DNA::getId();
+    sstm2 << DataDNA::getDataDNAidtodna()[DNA::getId()]->getId();
     result2 = sstm2.str();
-    return ("[" + result2 + "] "+ obj1->getName() +" "+ std::string(obj1->getDnaSeq())+"\n").c_str();
+    return ("["+result2+"]"+DataDNA::getDataDNAidtodna()[DNA::getId()]->getName() +": " + DataDNA::getDataDNAidtodna()[DNA::getId()]->getDnaSeq()+"\n").c_str();
 }
 
 size_t New::getNumName()
