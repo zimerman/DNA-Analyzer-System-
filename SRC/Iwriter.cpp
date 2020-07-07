@@ -4,7 +4,8 @@
 
 #include <iostream>
 #include "Iwriter.h"
-void FileWriter::write(const char* data)const
+
+void FileWriter::write(const std::string& data)const
 {
     std::ofstream myfile1;
     myfile1.open (m_naneWriter.c_str());
@@ -12,7 +13,7 @@ void FileWriter::write(const char* data)const
     myfile1.close();
 }
 
-void KeyBoardWriter::write(const char* data)const
+void KeyBoardWriter::write(const std::string& data)const
 {
     std::cout<<data;
 }

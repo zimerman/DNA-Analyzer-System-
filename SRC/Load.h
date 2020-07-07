@@ -5,8 +5,16 @@
 #ifndef SRC_LOAD_H
 #define SRC_LOAD_H
 
-
-class Load {
+#include "Icommand.h"
+#include "ParamCommand.h"
+class Load:public Icreate
+{
+    public:
+        Load(const ParamCommand& params);
+        const std::string run(const ParamCommand& params);
+    private:
+        bool isValid(const ParamCommand& params);
+        const std::string print();
 };
 
 

@@ -5,9 +5,8 @@
 #include <vector>
 #include "ParamCommand.h"
 #include <string>
-#include <iostream>
 
-std::vector<std::string> ParamCommand::getParam()const
+const std::vector<std::string>& ParamCommand::getParam()const
 {
     return m_param_vec;
 }

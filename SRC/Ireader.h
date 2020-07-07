@@ -8,35 +8,41 @@
 #include <iostream>
 
 class Ireader {
-public:
-    virtual std::string getData()const =0;
-private:
+    public:
+        virtual std::string getData()const =0;
+    private:
 };
 
 class DataReader:public Ireader
 {
-protected:
-    std::string m_data;
+    protected:
+        std::string m_data;
 };
-
 
 class FileReader:public DataReader
 {
-public:
-    FileReader(const char* myfile);
-    std::string getData()const;
-private:
+
 };
-
-
-
 
 class KeyboardReader:public DataReader
 {
+    public:
+        KeyboardReader();
+        std::string getData()const;
+};
+
+class FileReaderTxt: public FileReader
+{
+    public:
+        FileReaderTxt(const char* myfile);
+        std::string getData()const;
+};
+
+class FileReaderRwadna: public FileReader
+{
 public:
-    KeyboardReader();
+    FileReaderRwadna(const char* myfile);
     std::string getData()const;
-private:
 };
 
 #endif //DNA_IREADER_H

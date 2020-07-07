@@ -5,10 +5,11 @@
 #ifndef SRC_MANAGECOMMAND_H
 #define SRC_MANAGECOMMAND_H
 #include "Icommand.h"
-
-class ManageCommand {
-public:
-    static Icommand* createCtorCommand(const ParamCommand& pharams);
+#include "Load.h"
+class ManageCommand
+{
+    public:
+        static Icommand* createCtorCommand(const ParamCommand& pharams);
 };
 
 

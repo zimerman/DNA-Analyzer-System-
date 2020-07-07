@@ -18,7 +18,7 @@ bool New::isValid(const ParamCommand& params)
     return true;
 }
 
-const char* New::run(const ParamCommand& params)
+const std::string New::run(const ParamCommand& params)
 {
     DNA* obj1;
     std::string result;
@@ -42,7 +42,7 @@ const char* New::run(const ParamCommand& params)
     std::stringstream sstm2;
     sstm2 << DataDNA::getDataDNAidtodna()[DNA::getId()]->getId();
     result2 = sstm2.str();
-    return ("["+result2+"]"+DataDNA::getDataDNAidtodna()[DNA::getId()]->getName() +": " + DataDNA::getDataDNAidtodna()[DNA::getId()]->getDnaSeq()+"\n").c_str();
+    return ("["+result2+"]"+DataDNA::getDataDNAidtodna()[DNA::getId()]->getName() +": " + DataDNA::getDataDNAidtodna()[DNA::getId()]->getDnaSeq()+"\n");
 }
 
 size_t New::getNumName()

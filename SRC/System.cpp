@@ -15,7 +15,6 @@ void System::startApp()
         ParamCommand paramCommand(k.getData());
         Icommand* icommand = ManageCommand::createCtorCommand(paramCommand);
         KeyBoardWriter key;
-        //icommand->run(paramCommand);
         key.write(icommand->run(paramCommand));
     }
 }

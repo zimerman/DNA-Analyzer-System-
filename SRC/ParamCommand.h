@@ -8,11 +8,11 @@
 #include <string>
 class ParamCommand
 {
-public:
-    ParamCommand(std::string phrase);
-    std::vector<std::string> getParam()const;
-private:
-    std::vector<std::string> m_param_vec;
+    public:
+        ParamCommand(std::string phrase);
+        const std::vector<std::string>& getParam()const;
+    private:
+        std::vector<std::string> m_param_vec;
 };
 
 

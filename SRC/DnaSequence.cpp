@@ -9,7 +9,6 @@
 #include "stdlib.h"
 #include <list>
 
-
 DnaSequence::DnaSequence(const char* str)
 {
     if(!check_validation(str)) {
@@ -18,7 +17,6 @@ DnaSequence::DnaSequence(const char* str)
     m_len_string_dna = strlen(str);
     this->init(str);
 }
-
 
 DnaSequence::DnaSequence(size_t len)
 {
@@ -159,7 +157,6 @@ DnaSequence::Nucleotide& DnaSequence::operator[](size_t index)const
     return m_cstring_dna[index];
 }
 
-
 DnaSequence DnaSequence::slice(size_t start, size_t end)
 {
 	if( end > m_len_string_dna)
@@ -241,53 +238,10 @@ std::list<size_t> DnaSequence::findAll(const DnaSequence& sub_dna)
     return mylist;
 }
 
-
-/*std::list<size_t> DnaSequence::FindConsensusSequences()
-{
-	std::list<size_t> mylist;
-    std::list<size_t> list_start_codon;
-    std::list<size_t> list_end1_codon;
-    std::list<size_t> list_end2_codon;
-    std::list<size_t> list_end3_codon;
-    list_start_codon = findAll("ATG");
-    list_end1_codon = findAll("TAG");
-    list_end2_codon = findAll("TAA");
-    list_end2_codon = findAll("TGA");
-    for(std::list<size_t>::iterator iter = list_start_codon.begin(); iter!= list_start_codon.end();iter++)
-    {
-        for(std::list<size_t>::iterator iter1 = list_end1_codon.begin(); iter1!= list_end1_codon.end();iter1++)
-        {
-            if(*iter < *iter1 and (*iter1-*iter)%3==0)
-            {
-                mylist.push_back(*iter);
-            }
-
-        }
-        for(std::list<size_t>::iterator iter2 = list_end2_codon.begin(); iter2!= list_end2_codon.end();iter2++)
-        {
-            if(*iter < *iter2 and (*iter2-*iter)%3==0)
-            {
-                mylist.push_back(*iter);
-            }
-        }
-        for(std::list<size_t>::iterator iter3 = list_end3_codon.begin(); iter3!= list_end3_codon.end();iter3++)
-        {
-            if(*iter < *iter3 and (*iter3-*iter)%3==0)
-            {
-                mylist.push_back(*iter);
-            }
-        }
-    }
-    return mylist;
-}*/
-
-
 void DnaSequence::write(const Iwriter& dna)
 {
     dna.write(this->cast_char());
 }
-
-
 
 std::list<size_t> DnaSequence::FindConsensusSequences()
 {
@@ -318,55 +272,6 @@ std::list<size_t> DnaSequence::FindConsensusSequences()
     }
     return mylist;
 }
-
-
-
-
-
-
-/*size_t* DnaSequence::findAll(const DnaSequence& sub_dna)
-{
-	size_t i=0;
-	size_t j=0;
-	size_t* arr_ind = new size_t[count(sub_dna)];
-	size_t ind = find(sub_dna);
-	if(ind != m_len_string_dna)
-		arr_ind[j++] = ind;
-	size_t temp;
-	for(i=1;ind!= m_len_string_dna && i < m_len_string_dna; i++)
-	{
-		temp = slice(i, m_len_string_dna).find(sub_dna)+i;
-		if(ind != temp && ind!= m_len_string_dna)
-        {
-			arr_ind[j++] = temp;
-		}
-		ind = temp;
-	}
-	return arr_ind;
-}
-
-size_t DnaSequence::count(const DnaSequence& sub_dna)
-{
-    size_t i=0;
-    size_t count = 0;
-    size_t ind = find(sub_dna);
-    if(ind != m_len_string_dna)
-    {
-        count ++;
-    }
-    size_t temp;
-    for(i=1; ind != m_len_string_dna and i < m_len_string_dna; i++)
-    {
-        temp = slice(i, m_len_string_dna).find(sub_dna)+i;
-        if(ind != temp and temp != m_len_string_dna)
-        {
-            count ++;
-            ind = temp;
-        }
-    }
-    return count;
-}*/
-
 
 DnaSequence::DnaSequence(const Ireader& obj)
 {

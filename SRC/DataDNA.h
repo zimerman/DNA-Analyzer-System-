@@ -10,10 +10,10 @@
 #include "DNA.h"
 class DataDNA
 {
-public:
-    static std::map<size_t ,DNA*>& getDataDNAidtodna();
-    static std::map<std::string,size_t>& getDataDNAnametoid();
-private:
+    public:
+        static std::map<size_t ,DNA*>& getDataDNAidtodna();
+        static std::map<std::string,size_t>& getDataDNAnametoid();
+    private:
 };
 
 

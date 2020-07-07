@@ -5,11 +5,9 @@
 #ifndef SRC_SYSTEM_H
 #define SRC_SYSTEM_H
 
-
 class System {
-public:
-    void startApp();
-private:
+    public:
+        void startApp();
 };
 
 
