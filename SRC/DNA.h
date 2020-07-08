@@ -6,7 +6,7 @@
 #define CODE_DNA_H
 #include "DnaSequence.h"
 #include "string.h"
-
+#include "Status.h"
 class DNA
 {
     public:
@@ -14,11 +14,12 @@ class DNA
         static size_t getId();
         std::string getName();
         std::string getDnaSeq();
+        DnaSequence& getDnaSeq2();
     private:
         DnaSequence m_Dna_seq;
         static size_t m_id;
         std::string m_name;
-        std::string m_status;
+        Status m_status;
 };
 
 

@@ -25,3 +25,8 @@ std::string DNA::getDnaSeq()
 {
     return m_Dna_seq.cast_char();
 }
+
+DnaSequence& DNA::getDnaSeq2()
+{
+    return m_Dna_seq;
+}
