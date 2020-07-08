@@ -11,11 +11,10 @@ class Load:public Icreate
 {
     public:
         Load(const ParamCommand& params);
-        const std::string run(const ParamCommand& params);
+        void run(const Iwriter& writer,const ParamCommand& params,DataDNA& containerDna);
     private:
         bool isValid(const ParamCommand& params);
-        const std::string print();
+        void print(const Iwriter& writer,DataDNA& containerDna);
 };
-
 
 #endif //SRC_LOAD_H

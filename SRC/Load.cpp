@@ -21,47 +21,48 @@ Load::Load(const ParamCommand& params)
     }
 }
 
-const std::string Load::run(const ParamCommand& params)
+void Load::run(const Iwriter& writer,const ParamCommand& param, DataDNA& containerDna)
 {
-    FileReaderRwadna my_file_dna(params.getParam()[1].c_str());
-    DNA* dna;
-    if((params.getParam().size())==2)
+    FileReaderRwadna myfile(param.getParam()[1]);
+    myfile.read();
+    if(param.getParam().size()<3)
     {
-        dna = new DNA((params.getParam())[1],"new",my_file_dna);
+        DNA* newdna = new DNA(param.getParam()[1],"new",myfile);
+        containerDna.addDataDNAidtodna(newdna);
     }
     else
     {
-        dna = new DNA((params.getParam())[2],"new",my_file_dna);
+        DNA* newdna = new DNA(param.getParam()[2],"new",myfile);
+        containerDna.addDataDNAidtodna(newdna);
+        containerDna.addDataDNAnametoid((param.getParam())[2]);
+
     }
-    DataDNA::getDataDNAidtodna().insert(std::pair<size_t,DNA*>(DNA::getId(), dna));
-    DataDNA::getDataDNAnametoid().insert(std::pair<std::string, size_t>(params.getParam()[1], DNA::getId()));
-    return print();
+    print(writer,containerDna);
+
 }
 
-const std::string Load::print()
+void Load::print(const Iwriter& writer,DataDNA& containerDna)
 {
     std::string result2;
     std::stringstream sstm2;
-    sstm2 << DataDNA::getDataDNAidtodna()[DNA::getId()]->getId();
+    sstm2 << containerDna.getDataDNAidtodna()[DNA::getId()]->getId();
     result2 = sstm2.str();
-    if(DataDNA::getDataDNAidtodna()[DNA::getId()]->getDnaSeq().length()>40)
+    if(containerDna.getDataDNAidtodna()[DNA::getId()]->getDnaSeq().length()>40)
     {
-        std::string str=DataDNA::getDataDNAidtodna()[DNA::getId()]->getDnaSeq();
+        std::string str=containerDna.getDataDNAidtodna()[DNA::getId()]->getDnaSeq();
         str = str.substr(0,32);
-        return ("\n["+result2+"] " + (DataDNA::getDataDNAidtodna()[DNA::getId()]->getName())+": "+ str + "..." +
-                                     DataDNA::getDataDNAidtodna()[DNA::getId()]->getDnaSeq()[
-                                             DataDNA::getDataDNAidtodna()[DNA::getId()]->getDnaSeq().length() - 3]
-                                     + DataDNA::getDataDNAidtodna()[DNA::getId()]->getDnaSeq()[
-                                             DataDNA::getDataDNAidtodna()[DNA::getId()]->getDnaSeq().length() - 2]
-                                     + DataDNA::getDataDNAidtodna()[DNA::getId()]->getDnaSeq()[
-                                             DataDNA::getDataDNAidtodna()[DNA::getId()]->getDnaSeq().length() - 1]+"\n");
-
+        writer.write("\n["+result2+"] " + (containerDna.getDataDNAidtodna()[DNA::getId()]->getName())+": "+ str + "..." +
+                containerDna.getDataDNAidtodna()[DNA::getId()]->getDnaSeq()[
+                containerDna.getDataDNAidtodna()[DNA::getId()]->getDnaSeq().length() - 3]
+                 + containerDna.getDataDNAidtodna()[DNA::getId()]->getDnaSeq()[
+                containerDna.getDataDNAidtodna()[DNA::getId()]->getDnaSeq().length() - 2]
+                + containerDna.getDataDNAidtodna()[DNA::getId()]->getDnaSeq()[
+                containerDna.getDataDNAidtodna()[DNA::getId()]->getDnaSeq().length() - 1]+"\n");
     }
     else
     {
-        return ("\n["+result2+"] " + (DataDNA::getDataDNAidtodna()[DNA::getId()]->getName()) +": " + DataDNA::getDataDNAidtodna()[DNA::getId()]->getDnaSeq()+"\n");
+        writer.write("\n["+result2+"] " + (containerDna.getDataDNAidtodna()[DNA::getId()]->getName()) +": " + containerDna.getDataDNAidtodna()[DNA::getId()]->getDnaSeq()+"\n");
     }
-
 }
 
 
