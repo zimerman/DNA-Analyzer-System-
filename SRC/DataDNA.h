@@ -11,9 +11,13 @@
 class DataDNA
 {
     public:
-        static std::map<size_t ,DNA*>& getDataDNAidtodna();
-        static std::map<std::string,size_t>& getDataDNAnametoid();
+        void addDataDNAidtodna(DNA* size_t);
+        void addDataDNAnametoid(std::string name);
+        std::map<size_t ,DNA*>& getDataDNAidtodna();
+        DNA* find(size_t id);
     private:
+        std::map<size_t ,DNA*> m_mapIdDna;
+        std::map<std::string,size_t> m_mapNameId;
 };
 
 

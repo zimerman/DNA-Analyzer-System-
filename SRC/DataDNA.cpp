@@ -5,12 +5,20 @@
 
 std::map<size_t ,DNA*>& DataDNA::getDataDNAidtodna()
 {
-    static std::map<size_t ,DNA*> m_mapIdDna;
     return m_mapIdDna;
 }
 
-std::map<std::string,size_t>& DataDNA::getDataDNAnametoid()
+void DataDNA::addDataDNAidtodna(DNA* dna)
 {
-    static std::map<std::string,size_t> m_mapNameId;
-    return m_mapNameId;
+    m_mapIdDna.insert(std::pair<size_t,DNA*>(DNA::getId(), dna));
+}
+
+void DataDNA::addDataDNAnametoid(std::string name)
+{
+    m_mapNameId.insert(std::pair<std::string, size_t>(name,DNA::getId()));
+}
+
+DNA* DataDNA::find(size_t id)
+{
+    return m_mapIdDna[id];
 }
