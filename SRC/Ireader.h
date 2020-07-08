@@ -10,7 +10,8 @@
 class Ireader {
     public:
         virtual std::string getData()const =0;
-    private:
+        virtual void read()=0;
+private:
 };
 
 class DataReader:public Ireader
@@ -27,22 +28,30 @@ class FileReader:public DataReader
 class KeyboardReader:public DataReader
 {
     public:
-        KeyboardReader();
         std::string getData()const;
+        void read();
+    private:
+        std::string m_name_file;
 };
 
 class FileReaderTxt: public FileReader
 {
     public:
-        FileReaderTxt(const char* myfile);
+        FileReaderTxt(const std::string& myfile);
         std::string getData()const;
+    private:
+        std::string m_name_file;
+
 };
 
 class FileReaderRwadna: public FileReader
 {
 public:
-    FileReaderRwadna(const char* myfile);
+    FileReaderRwadna(const std::string& myfile);
     std::string getData()const;
+    void read();
+private:
+    std::string m_name_file;
 };
 
 #endif //DNA_IREADER_H
