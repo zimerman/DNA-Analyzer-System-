@@ -10,7 +10,7 @@
 #include "Save.h"
 bool Save::isValid(const ParamCommand& params)
 {
-    return true;
+    return (params.getParam().size() == 2 || ((params.getParam().size() == 3) && (params.getParam()[2][0] == '@')))&&(params.getParam()[1][0]=='#');
 }
 
 Save::Save(const ParamCommand& params)
@@ -26,6 +26,11 @@ void Save::run(const Iwriter& writer,const ParamCommand& params,DataDNA& contain
     std::stringstream temp(name);
     size_t id;
     temp >> id;
+    if(!containerDna.isExistId(id))
+    {
+        std::cout<<"this key not found in map";
+        return;
+    }
     if(params.getParam().size()<3)
     {
         FileWriter myfile(containerDna.find(id)->getName());
