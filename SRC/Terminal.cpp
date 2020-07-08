@@ -14,7 +14,14 @@ void Terminal::start(Ireader& reader,const Iwriter& writer,DataDNA& dataDna)
     {
         reader.read();
         ParamCommand paramCommand(reader.getData());
-        Icommand* icommand = ManageCommand::createCtorCommand(paramCommand);
-        icommand->run(writer,paramCommand,dataDna);
+        try{
+            Icommand* icommand = ManageCommand::createCtorCommand(paramCommand);
+            icommand->run(writer,paramCommand,dataDna);
+        }
+        catch(std::invalid_argument& e)
+        {
+            std::cout<<e.what();
+        }
+
     }
 }
