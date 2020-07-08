@@ -3,18 +3,13 @@
 //
 
 #include "System.h"
-#include "Icommand.h"
-#include "ManageCommand.h"
 #include "Ireader.h"
+#include "Terminal.h"
+#include "DataDNA.h"
 
-void System::startApp()
+void System::startApp(Ireader& reader,const Iwriter& writer)
 {
-    while(1)
-    {
-        KeyboardReader k;
-        ParamCommand paramCommand(k.getData());
-        Icommand* icommand = ManageCommand::createCtorCommand(paramCommand);
-        KeyBoardWriter key;
-        key.write(icommand->run(paramCommand));
-    }
+    DataDNA dataDna;
+    Terminal terminal;
+    terminal.start(reader,writer,dataDna);
 }

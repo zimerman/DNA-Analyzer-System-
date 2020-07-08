@@ -5,9 +5,12 @@
 #ifndef SRC_SYSTEM_H
 #define SRC_SYSTEM_H
 
+#include "Ireader.h"
+#include "Iwriter.h"
+
 class System {
     public:
-        void startApp();
+        void startApp(Ireader& reader,const Iwriter& writer);
 };
 
 
