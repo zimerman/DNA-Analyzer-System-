@@ -9,8 +9,8 @@
 class Icommand
 {
     public:
-        Icommand();
-        virtual const std::string run(const ParamCommand& params)=0;
+        Icommand(){};
+        virtual void run(const Iwriter& writer,const ParamCommand& params,DataDNA& containerDna)=0;
 };
 
 class Icreate: public Icommand
@@ -18,15 +18,6 @@ class Icreate: public Icommand
 
 };
 
-class New: public Icreate
-{
-    public:
-        New(const ParamCommand& params);
-        const std::string run(const ParamCommand& params);
-        static size_t getNumName();
-    private:
-        bool isValid(const ParamCommand& params);
-        static size_t m_numName;
-};
+
 
 #endif //CODE_ICOMMAND_H
