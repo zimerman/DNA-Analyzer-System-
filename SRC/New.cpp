@@ -7,39 +7,48 @@
 #include "DNA.h"
 #include "DataDNA.h"
 #include "New.h"
+#include "AuxiliaryFunctions.h"
 New::New(const ParamCommand& params)
 {
     std::cout << "new" << std::endl;
     if(!isValid(params)) {
-        throw std::invalid_argument("error in create new");
+        throw std::invalid_argument("\nthis command is not valid to new\n");
     }
 }
 
 bool New::isValid(const ParamCommand& params)
 {
-    return true;
+    return params.getParam().size() == 2 || ((params.getParam().size() == 3) && (params.getParam()[2][0] == '@'));
 }
 
 void New::run(const Iwriter& writer,const ParamCommand& params,DataDNA& containerDna)
 {
-    static size_t count =0;
+    static size_t count =1;
     DNA* obj1;
-    std::string result;
+    std::string name;
     if(params.getParam().size()<3)
     {
-        std::stringstream sstm;
-        sstm << "seq"<< count;
-        result = sstm.str();
+        name = "seq"+ castToString(count);
         count++;
-        obj1 = new DNA(result,"new",(params.getParam())[1]);
+        while(containerDna.isExist(name))
+        {
+            ++count;
+            name = "seq"+ castToString(count);
+        }
+        obj1 = new DNA(name,"new",(params.getParam())[1]);
         containerDna.addDataDNAidtodna(obj1);
         containerDna.addDataDNAnametoid((params.getParam())[1]);
     }
     else
     {
-        obj1 = new DNA((params.getParam())[2],"new",(params.getParam())[1]);
+        if((containerDna.isExist(params.getParam()[2])))
+        {
+            std::cout<<"this name of sequence exsist";
+            return;
+        }
+        obj1 = new DNA((params.getParam())[2].substr(1),"new",(params.getParam())[1]);
         containerDna.addDataDNAidtodna(obj1);
-        containerDna.addDataDNAnametoid((params.getParam())[1]);
+        containerDna.addDataDNAnametoid((params.getParam())[2]);
     }
     print(writer, containerDna);
 }
