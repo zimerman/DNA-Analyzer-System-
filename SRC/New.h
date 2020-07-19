@@ -9,12 +9,12 @@
 #include "ParamCommand.h"
 class New: public Icreate
 {
-    public:
-        New(const ParamCommand& params);
-        void run(const Iwriter&,const ParamCommand& params,DataDNA& containerDna);
-    private:
-        bool isValid(const ParamCommand& params);
-        void print(const Iwriter& writer,DataDNA& containerDna);
+public:
+    New(const ParamCommand& params);
+    void run(const Iwriter&,const ParamCommand& params,DataDNA& containerDna);
+private:
+    bool isValid(const ParamCommand& params);
+    void print(const Iwriter& writer,DataDNA& containerDna);
 };
 
 

@@ -9,12 +9,12 @@
 #include "ParamCommand.h"
 class Load:public Icreate
 {
-    public:
-        Load(const ParamCommand& params);
-        void run(const Iwriter& writer,const ParamCommand& params,DataDNA& containerDna);
-    private:
-        bool isValid(const ParamCommand& params);
-        void print(const Iwriter& writer,DataDNA& containerDna);
+public:
+    Load(const ParamCommand& params);
+    void run(const Iwriter& writer,const ParamCommand& params,DataDNA& containerDna);
+private:
+    bool isValid(const ParamCommand& params);
+    void print(const Iwriter& writer,DataDNA& containerDna);
 };
 
 #endif //SRC_LOAD_H
