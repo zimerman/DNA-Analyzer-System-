@@ -3,13 +3,18 @@
 //
 
 #include "System.h"
-#include "Ireader.h"
-#include "Terminal.h"
-#include "DataDNA.h"
-
-void System::startApp(Ireader& reader,const Iwriter& writer)
+#include "../View/Iwriter.h"
+#include "../View/Ireader.h"
+#include "../Model/dataDNA.h"
+#include "../View/Terminal.h"
+#include "stdlib.h"
+void System::start(const Iwriter& writer, Ireader& reader,UserInterface* UI)
 {
-    DataDNA dataDna;
-    Terminal terminal;
-    terminal.start(reader,writer,dataDna);
+    dataDNA containerDna;
+    int t = UI->start(writer,reader,containerDna);
+    if(t==-1)
+    {
+        exit(0);
+    }
 }
+

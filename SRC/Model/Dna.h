@@ -2,29 +2,47 @@
 // Created by a on 7/5/20.
 //
 
-#ifndef CODE_DNA_H
-#define CODE_DNA_H
-#include "DnaSequence.h"
-#include "string.h"
-#include "Status.h"
-class DNA
-{
+#ifndef DNDSEQUENCE_DNA_H
+#define DNDSEQUENCE_DNA_H
+
+
+#include <string>
+#include "dnasequence.h"
+#include "StatusDna.h"
+class Dna {
 public:
-    DNA(const std::string& name,const std::string& status,const DnaSequence& dnaSeq);
-    static size_t getId();
-    std::string getName();
-    std::string getDnaSeq();
-    DnaSequence* getDnaSeq2();
-    size_t getCount()const;
-    void setCount();
-    Status& getStatus();
+    Dna(const std::string&  name, const std::string&  status, const Dnasequence& dnasequence);
+    ~Dna();
+    const static size_t getId();
+    const std::string& getName();
+    const Dnasequence& getDna();
+    const size_t getCountName()const;
+    size_t setCountName();
+    StatusDna getStatus();
+    void setDnaSequence(const Dnasequence& dnasequence);
 private:
-    DnaSequence* m_Dna_seq;
-    static size_t m_id;
+    Dnasequence* m_Dna;
     std::string m_name;
-    Status m_status;
-    size_t m_count;
+    StatusDna m_status;
+    static size_t m_id;
+    size_t m_countName;
+
 };
+inline const size_t Dna::getId()
+{
+    return m_id;
+}
+inline const std::string& Dna::getName()
+{
+    return m_name;
+}
+inline const Dnasequence& Dna::getDna()
+{
+    return *m_Dna;
+}
+inline const size_t Dna::getCountName()const
+{
+    return m_countName;
+}
 
-
-#endif //CODE_DNA_H
+#endif //DNDSEQUENCE_DNA_H

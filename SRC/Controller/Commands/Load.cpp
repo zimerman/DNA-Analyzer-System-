@@ -2,85 +2,93 @@
 // Created by a on 7/6/20.
 //
 
+#include <stdexcept>
 #include <sstream>
 #include "Load.h"
-#include "Ireader.h"
-#include "DNA.h"
-#include "DataDNA.h"
-
-bool Load::isValid(const ParamCommand& params)
+#include "../../View/rawDnaReader.h"
+#include "../Auxiliaryfunctions.h"
+bool Load::isValid(const Paramcommand& param)
 {
-    return params.getParam().size() == 2 || ((params.getParam().size() == 3) && (params.getParam()[2][0] == '@'));
+    std::cout<<"dh";
+    return ((2==param.getParam().size()||(param.getParam().size()==3&&(param.getParam()[2][0]=='@'))));
 }
 
-Load::Load(const ParamCommand& params)
-{
-    if(!isValid(params))
-    {
-        throw std::invalid_argument("\nthis command is not valid to Load");
-    }
-}
+//Load::Load(const Paramcommand& param)
+//{
+//    if(!isValid(param))
+//        throw std::invalid_argument("command not found");
+//
+//}
 
-void Load::run(const Iwriter& writer,const ParamCommand& param, DataDNA& containerDna)
+
+void Load::run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& param)
 {
-    FileReaderRwadna myfile(param.getParam()[1]);
+    if(!isValid(param))
+        throw std::invalid_argument("command not found");
+    rawDnaReader myfile(param.getParam()[1]);
     myfile.read();
-    std::string name;
+    std::string filename=param.getParam()[1];
+
+    std::string dnaName;
+
     if(param.getParam().size()<3)
     {
-        name=param.getParam()[1];
-        /*containerDna.find();
-        while(containerDna.isExist(containerDna.find(name)))
+
+        dnaName = param.getParam()[1];
+       if(containerDna.isexistName(dnaName))
+       {
+           dnaName=param.getParam()[1]+"_"+castToString(containerDna.findInNameMap(dnaName)->getCountName());
+
+       }
+        while(containerDna.isexistName(dnaName))
         {
-            containerDna.castToSizet()
-        }*/
+
+            containerDna.findInNameMap(dnaName)->setCountName();
+            dnaName=param.getParam()[1]+"_"+castToString(containerDna.findInNameMap(dnaName)->getCountName());
+
+        }
+
     }
     else
     {
-        if(containerDna.isExist(param.getParam()[2]))
-        {
-            std::cout<<"There is such a well-known sequence already";
-            return;
-        }
-        name=param.getParam()[2].substr(1);
+        dnaName = param.getParam()[2].substr(1);
+
     }
-    if(containerDna.isExist(name))
+
+    if(containerDna.isexistName(dnaName))
     {
-        std::string result4;
-        std::stringstream sstm4;
-        sstm4 << containerDna.getNameDna(name)->getCount();
-        containerDna.getNameDna(name)->setCount();
-        result4 = sstm4.str();
-        name = name + "_" + result4;
+        writer.write("This name already Exists");
+        return;
+
     }
-    DNA* newdna = new DNA(name,"new",myfile);
-    containerDna.addDataDNAidtodna(newdna);
-    containerDna.addDataDNAnametoid(name);
+    Dna* newdna = new Dna(dnaName,"new",myfile);
+    containerDna.addDna(newdna);
     print(writer,containerDna);
+
 }
 
-void Load::print(const Iwriter& writer,DataDNA& containerDna)
+
+void Load::print(const Iwriter& writer, dataDNA& containerDna)const
 {
-    std::string result2;
-    std::stringstream sstm2;
-    sstm2 << containerDna.getDataDNAidtodna()[DNA::getId()]->getId();
-    result2 = sstm2.str();
-    if(containerDna.getDataDNAidtodna()[DNA::getId()]->getDnaSeq().length()>40)
+
+    std::string strId =castToString(containerDna.findInIdMap(Dna::getId())->getId());
+
+
+
+    if(containerDna.findInIdMap(Dna::getId())->getDna().length()<40)
     {
-        std::string str=containerDna.getDataDNAidtodna()[DNA::getId()]->getDnaSeq();
-        str = str.substr(0,32);
-        writer.write("\n["+result2+"] " + (containerDna.getDataDNAidtodna()[DNA::getId()]->getName())+": "+ str + "..." +
-                     containerDna.getDataDNAidtodna()[DNA::getId()]->getDnaSeq()[
-                             containerDna.getDataDNAidtodna()[DNA::getId()]->getDnaSeq().length() - 3]
-                     + containerDna.getDataDNAidtodna()[DNA::getId()]->getDnaSeq()[
-                             containerDna.getDataDNAidtodna()[DNA::getId()]->getDnaSeq().length() - 2]
-                     + containerDna.getDataDNAidtodna()[DNA::getId()]->getDnaSeq()[
-                             containerDna.getDataDNAidtodna()[DNA::getId()]->getDnaSeq().length() - 1]+"\n");
+        writer.write("[" + strId + "]" + containerDna.findInIdMap(Dna::getId())->getName() + ":" +
+          containerDna.findInIdMap(Dna::getId())->getDna().getAsChar());
     }
     else
     {
-        writer.write("\n["+result2+"] " + (containerDna.getDataDNAidtodna()[DNA::getId()]->getName()) +": " + containerDna.getDataDNAidtodna()[DNA::getId()]->getDnaSeq()+"\n");
+        std::string lastDnasequence= (containerDna.findInIdMap(Dna::getId())->getDna()).getAsChar()+containerDna.findInIdMap(Dna::getId())->getDna().length()-3;
+        std::string firstDnasequence(containerDna.findInIdMap(Dna::getId())->getDna().getAsChar());
+        firstDnasequence = firstDnasequence.substr(0,32);
+        writer.write("[" + strId + "]" + containerDna.findInIdMap(Dna::getId())->getName() + ":" + firstDnasequence+"..."+lastDnasequence);
+
     }
+
 }
 
 

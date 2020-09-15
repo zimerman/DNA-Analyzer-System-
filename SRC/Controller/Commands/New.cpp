@@ -1,63 +1,55 @@
 //
-// Created by a on 7/8/20.
+// Created by a on 9/14/20.
 //
-#include <sstream>
-#include "Load.h"
-#include "Ireader.h"
-#include "DNA.h"
-#include "DataDNA.h"
+
 #include "New.h"
-#include "AuxiliaryFunctions.h"
-New::New(const ParamCommand& params)
+#include "../Auxiliaryfunctions.h"
+
+bool New::isValid(const Paramcommand& param)
 {
-    std::cout << "new" << std::endl;
-    if(!isValid(params)) {
-        throw std::invalid_argument("\nthis command is not valid to new\n");
-    }
+    return ((2==param.getParam().size()||(param.getParam().size()==3&&(param.getParam()[2][0]=='@'))));
+
 }
 
-bool New::isValid(const ParamCommand& params)
-{
-    return params.getParam().size() == 2 || ((params.getParam().size() == 3) && (params.getParam()[2][0] == '@'));
-}
 
-void New::run(const Iwriter& writer,const ParamCommand& params,DataDNA& containerDna)
+void New::run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& param)
 {
-    static size_t count =1;
-    DNA* obj1;
-    std::string name;
-    if(params.getParam().size()<3)
+    if(!isValid(param))
+        throw std::invalid_argument("command not found");
+    static size_t countId=0;
+
+    std::string dnaName;
+
+
+    if(param.getParam().size()<3)
     {
-        name = "seq"+ castToString(count);
-        count++;
-        while(containerDna.isExist(name))
+        dnaName = "seq"+castToString(++countId);
+        while(containerDna.isexistName(dnaName))
         {
-            ++count;
-            name = "seq"+ castToString(count);
+            dnaName = "seq"+castToString(++countId);
         }
-        obj1 = new DNA(name,"new",(params.getParam())[1]);
-        containerDna.addDataDNAidtodna(obj1);
-        containerDna.addDataDNAnametoid((params.getParam())[1]);
+
     }
     else
     {
-        if((containerDna.isExist(params.getParam()[2])))
-        {
-            std::cout<<"this name of sequence exsist";
-            return;
-        }
-        obj1 = new DNA((params.getParam())[2].substr(1),"new",(params.getParam())[1]);
-        containerDna.addDataDNAidtodna(obj1);
-        containerDna.addDataDNAnametoid((params.getParam())[2]);
+        dnaName = param.getParam()[2].substr(1);;
     }
-    print(writer, containerDna);
-}
 
-void New::print(const Iwriter& writer,DataDNA& containerDna)
+    if(containerDna.isexistName(dnaName))
+    {
+        writer.write("This name already Exists");
+        return;
+    }
+
+    Dna* newdna = new Dna(dnaName, "new",param.getParam()[1]);
+    containerDna.addDna(newdna);
+    print(writer,containerDna);
+
+}
+void New::print(const Iwriter& writer, dataDNA& containerDna)
 {
-    std::string result2;
-    std::stringstream sstm2;
-    sstm2 << containerDna.getDataDNAidtodna()[DNA::getId()]->getId();
-    result2 = sstm2.str();
-    writer.write("["+result2+"]"+containerDna.getDataDNAidtodna()[DNA::getId()]->getName() +": " + containerDna.getDataDNAidtodna()[DNA::getId()]->getDnaSeq()+"\n");
+
+    std::string strId =castToString(containerDna.findInIdMap(Dna::getId())->getId());
+    writer.write("[" +strId+ "]"+ containerDna.findInIdMap(Dna::getId())->getName()+":"+containerDna.findInIdMap(Dna::getId())->getDna().getAsChar());
+
 }

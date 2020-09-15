@@ -1,23 +1,33 @@
 //
 // Created by a on 7/5/20.
 //
-#ifndef CODE_ICOMMAND_H
-#define CODE_ICOMMAND_H
-#include "ParamCommand.h"
-#include "DataDNA.h"
-#include "DNA.h"
-class Icommand
-{
+
+#ifndef DNDSEQUENCE_ICOMMAND_H
+#define DNDSEQUENCE_ICOMMAND_H
+
+#include "../Paramcommand.h"
+#include "../../Model/dataDNA.h"
+#include <string>
+
+class Icommand{
+
 public:
-    Icommand(){};
-    virtual void run(const Iwriter& writer,const ParamCommand& params,DataDNA& containerDna)=0;
-};
-
-class Icreate: public Icommand
-{
+    virtual ~Icommand(){};
+    virtual void run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& obj) = 0;
 
 };
 
+class Icreate:public Icommand{
+public:
+    virtual ~Icreate(){};
+};
 
 
-#endif //CODE_ICOMMAND_H
+class Ichange:public Icommand{
+public:
+    virtual ~Ichange(){};
+};
+
+
+
+#endif //DNDSEQUENCE_ICOMMAND_H

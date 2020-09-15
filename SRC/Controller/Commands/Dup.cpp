@@ -4,94 +4,106 @@
 
 #include <sstream>
 #include "Dup.h"
-#include "AuxiliaryFunctions.h"
-bool Dup::isValid(const ParamCommand& params)
+#include "../Auxiliaryfunctions.h"
+//Dup::Dup(const Paramcommand& obj)
+//{
+//    if(!isValid(obj))
+//    {
+//        throw std::invalid_argument("command not found");
+//
+//    }
+//
+//}
+
+bool Dup::isValid(const Paramcommand& param)
 {
-    return true;//(params.getParam().size() == 2 || ((params.getParam().size() == 3) && (params.getParam()[2][0] == '@'))) && (params.getParam()[1][0] == '#');
+    return ((2==param.getParam().size()||(param.getParam().size()==3&&(param.getParam()[2][0]=='@')))&&(param.getParam()[1][0]=='#'||param.getParam()[1][0]=='@'));
 }
 
-Dup::Dup(const ParamCommand& params)
-{
-    if(!isValid(params))
-    {
-        throw std::invalid_argument("this command is not valid to Load");
+
+
+Dna* Dup::dupByName(dataDNA&containerDna, const Paramcommand&param) {
+    std::string string = param.getParam()[1].substr(1);
+    std::string dnaName;
+    if (param.getParam().size() < 3) {
+
+        dnaName = containerDna.findInNameMap(string)->getName() + "_" +
+                  castToString(containerDna.findInNameMap(string)->getCountName());
+        containerDna.findInNameMap(string)->setCountName();
+        while (containerDna.isexistName(dnaName)) {
+            dnaName = containerDna.findInNameMap(string)->getName() + "_" +
+                      castToString(containerDna.findInNameMap(string)->getCountName());
+            containerDna.findInNameMap(string)->setCountName();
+        }
+
+    } else {
+        dnaName = param.getParam()[2].substr(1);
     }
+    Dna *newdna = new Dna(dnaName, "new", containerDna.findInNameMap(string)->getDna());
+    return newdna;
 }
-
-void Dup::run(const Iwriter& writer,const ParamCommand& params,DataDNA& containerDna)
+Dna* Dup::dupById(dataDNA&containerDna, const Paramcommand&param)
 {
-    static size_t count=1;
-    std::string nameDna;
-    DNA* obj1;
-    if(params.getParam()[1][0] == '#')
+    size_t idDna = castToSize(param.getParam()[1].substr(1));
+    std::string dnaName;
+    if(param.getParam().size()<3)
     {
-        size_t id = castToSizet(((params.getParam())[1]).substr(1));
-        if(!(containerDna.isExistId(id)))
+
+        while(containerDna.isexistName(dnaName))
         {
-            std::cout<<"this key not found in map";
-            return;
+            dnaName = containerDna.findInIdMap(idDna)->getName()+"_"+castToString(containerDna.findInIdMap(idDna)->getCountName());
+            containerDna.findInIdMap(idDna)->setCountName();
         }
-        if(params.getParam().size()<3)
-        {
-            /*std::string result = castToString(count);
-            nameDna = containerDna.find(id)->getName() + "_" + result;
-            count++;*/
-            std::string result = castToString(count);
-            while(containerDna.isExistId(count))
-            {
-                nameDna = containerDna.find(id)->getName() + "_" + result;
-                count++;
-                result = castToString(count);
-            }
-        }
-        else
-        {
-            nameDna = (params.getParam())[2];
-        }
-        obj1 = new DNA(nameDna,"new",containerDna.find(id)->getDnaSeq());
+
     }
     else
     {
-        std::string name = ((params.getParam())[1]).substr(1);
-        //size_t id = castToSizet(((params.getParam())[1]).substr(1));
-        /*if(containerDna.isExist(name))
-        {
-            std::cout<<"this key name not found in map";
-            return;
-        }*/
-        if(params.getParam().size()<3)
-        {
-            /*std::string result = castToString(count);
-            nameDna = containerDna.find(id)->getName() + "_" + result;
-            count++;*/
-            std::string result = castToString(count);
-            while(containerDna.isExistId(count))
-            {
-                nameDna = containerDna.getNameDna(name)->getName()+"_"+result;
-                count++;
-                result = castToString(count);
-            }
-        }
-        else
-        {
-            std::cout<<"\n123\n";
-            nameDna = (params.getParam())[2];
-        }
-        std::cout<<"\n123\n";
-        obj1 = new DNA(nameDna,"new",containerDna.getNameDna(name)->getDnaSeq());
-        //obj1 = new DNA(nameDna,"new",containerDna.find(id)->getDnaSeq());
+        dnaName = param.getParam()[2].substr(1);;
     }
-    std::cout<<"\n123\n";
-    containerDna.addDataDNAidtodna(obj1);
-    containerDna.addDataDNAnametoid(nameDna);
-    print(writer, containerDna);
+    Dna* newdna = new Dna(dnaName, "new",containerDna.findInIdMap(idDna)->getDna());
+    return newdna;
 }
 
-void Dup::print(const Iwriter& writer,DataDNA& containerDna)
+void Dup::run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& param)
 {
-    std::string result2;
-    std::stringstream sstm2;
-    sstm2 << containerDna.getDataDNAidtodna()[DNA::getId()]->getId();
-    result2 = sstm2.str();
-    writer.write("\n["+result2+"] " +containerDna.find(DNA::getId())->getName() + ": "+containerDna.getDataDNAidtodna()[DNA::getId()]->getDnaSeq()+"\n");
+    if(!isValid(param))
+    {
+        throw std::invalid_argument("command not found");
+
+    }
+    std::string dnaName;
+    std::string string = param.getParam()[1].substr(1);
+    size_t idDna = castToSize(string);
+
+    if(param.getParam()[1][0]=='@')
+    {
+        if(!containerDna.isexistName(string))
+        {
+            std::cout<<"name of DNA not found";
+            return;
+        }
+        containerDna.addDna(dupByName(containerDna,param));
+
+    }
+    else
+    {
+
+        if(!containerDna.isexistId(idDna))
+        {
+            std::cout<<"id of DNA not found";
+            return;
+        }
+        containerDna.addDna(dupById(containerDna,param));
+    }
+
+    print(writer,containerDna);
+
+}
+
+void Dup::print(const Iwriter& writer, dataDNA& containerDna)
+{
+
+    std::string strId1 = castToString(containerDna.findInIdMap(Dna::getId())->getId());
+    writer.write("[" +strId1+ "]"+ containerDna.findInIdMap(Dna::getId())->getName()+":"+containerDna.findInIdMap(Dna::getId())->getDna().getAsChar());
+
 }

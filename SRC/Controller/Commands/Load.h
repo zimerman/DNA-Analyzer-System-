@@ -2,19 +2,26 @@
 // Created by a on 7/6/20.
 //
 
-#ifndef SRC_LOAD_H
-#define SRC_LOAD_H
+#ifndef DNDSEQUENCE_LOAD_H
+#define DNDSEQUENCE_LOAD_H
 
+
+#include "../Paramcommand.h"
 #include "Icommand.h"
-#include "ParamCommand.h"
-class Load:public Icreate
-{
+class Load:public Icreate {
+
 public:
-    Load(const ParamCommand& params);
-    void run(const Iwriter& writer,const ParamCommand& params,DataDNA& containerDna);
+
+//    Load(const Paramcommand& param);
+    /*virtual*/~Load(){}
+    void run(const Iwriter& writer,dataDNA& containerDna,const Paramcommand& obj);
+
 private:
-    bool isValid(const ParamCommand& params);
-    void print(const Iwriter& writer,DataDNA& containerDna);
+
+    bool isValid(const Paramcommand& obj);
+    void print(const Iwriter& writer, dataDNA& containerDna)const;
+
 };
 
-#endif //SRC_LOAD_H
+
+#endif //DNDSEQUENCE_LOAD_H

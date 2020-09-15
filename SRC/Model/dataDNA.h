@@ -2,26 +2,30 @@
 // Created by a on 7/5/20.
 //
 
-#ifndef CODE_DATADNA_H
-#define CODE_DATADNA_H
+#ifndef DNDSEQUENCE_DATADNA_H
+#define DNDSEQUENCE_DATADNA_H
 
 #include <map>
-#include <vector>
-#include "DNA.h"
-class DataDNA
-{
+#include "Dna.h"
+#include "IdDna.h"
+#include "NameDna.h"
+#include "StatusDna.h"
+class dataDNA {
 public:
-    void addDataDNAidtodna(DNA* size_t);
-    void addDataDNAnametoid(std::string name);
-    std::map<size_t ,DNA*>& getDataDNAidtodna();
-    DNA* getNameDna(std::string name);
-    DNA* find(size_t id);
-    bool isExist(std::string name);
-    bool isExistId(size_t id);
+    ~dataDNA();
+    void addDna(Dna* newDna);
+     //std::map<size_t ,Dna*>& getMap();
+     Dna*findInIdMap(size_t);
+    Dna*findInNameMap(const std::string& name);
+    size_t findIdByName(const std::string& name);
+    bool isexistId(size_t);
+    bool isexistName(const std::string& name);
 private:
-    std::map<size_t ,DNA*> m_mapIdDna;
-    std::map<std::string,size_t> m_mapNameId;
+     std::map<size_t ,Dna*> m_mapIdDna;
+     std::map<std::string ,size_t> m_mapNameDna;
+
+
 };
 
 
-#endif //CODE_DATADNA_H
+#endif //DNDSEQUENCE_DATADNA_H

@@ -1,21 +1,28 @@
 //
-// Created by a on 7/7/20.
+// Created by a on 7/6/20.
 //
 
-#ifndef SRC_SAVE_H
-#define SRC_SAVE_H
+#ifndef DNDSEQUENCE_SAVE_H
+#define DNDSEQUENCE_SAVE_H
 
+#include "../ImanageDna.h"
+#include "../../View/rawDnaWriter.h"
 
-#include "IManageaDna.h"
-class Save: public IManageaDna
-{
+class Save: public ImanageDna{
+
 public:
-    Save(const ParamCommand& params);
-    void run(const Iwriter& writer,const ParamCommand& params,DataDNA& containerDna);
+    /*virtual*/~Save(){}
+//    Save(const Paramcommand& obj);
+    void run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& obj);
+
 private:
-    bool isValid(const ParamCommand& params);
-    const std::string print();
+    bool isValid(const Paramcommand& obj);
+    //void print(const Iwriter& writer, dataDNA& containerDna);
+    std::string saveById(dataDNA& containerDna,const Paramcommand&param);
+    std::string saveByName(dataDNA& containerDna, const Paramcommand&param);
+
+
 };
 
 
-#endif //SRC_SAVE_H
+#endif //DNDSEQUENCE_SAVE_H

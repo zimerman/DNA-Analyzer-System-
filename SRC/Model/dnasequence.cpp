@@ -2,282 +2,271 @@
 // Created by a on 6/1/20.
 //
 
-#include "DnaSequence.h"
-#include "string.h"
+#include "dnasequence.h"
+#include <cstring>
 #include "string"
-#include "ostream"
-#include "stdlib.h"
-#include <list>
+#include "vector"
 
-/*DnaSequence::DnaSequence(const char* str)
-{
-    if(!check_validation(str)) {
-        throw std::invalid_argument("this value not match to dna");
-    }
-    m_len_string_dna = strlen(str);
-    this->init(str);
-}
-*/
-DnaSequence::DnaSequence(size_t len)
-{
-
-    m_len_string_dna = len;
-    m_cstring_dna = new Nucleotide[len+1];
-}
-
-DnaSequence::DnaSequence(const std::string& str)
-{
-    if(!check_validation(str.c_str()))
-    {
-        throw std::invalid_argument("this value not match to dna");
-    }
-    m_len_string_dna = str.length();
-    this->init(str.c_str());
-}
-
-DnaSequence::DnaSequence(const DnaSequence& obj)
-{
-    m_len_string_dna = obj.m_len_string_dna;
-    this->init(obj.cast_char());
-}
-
-DnaSequence::~DnaSequence()
-{
-    delete[] m_cstring_dna;
-    m_cstring_dna = NULL;
-}
-
-void DnaSequence::init(const char* str)
-{
-    if(!(check_validation(str)))
-    {
-        throw std::invalid_argument("this value not match to dna");
-    }
-    m_cstring_dna = new Nucleotide[strlen(str)+1];
-    for(size_t i=0;i < strlen(str); i++)
-    {
-        m_cstring_dna[i] = str[i];
-    }
-}
-
-bool DnaSequence::check_validation(const char *str)
+bool Dnasequence::isValid(const char* str)
 {
     if(!str)
-    {
-        return false;
-    }
-    if(!(strspn(str, "ACTG")==strlen(str)))
-    {
-        return false;
-    }
+        throw std::invalid_argument("cstring is not valide");
+    if(!(strspn(str,"ACTG")==strlen(str)))
+        throw std::invalid_argument( "invalid DNA" );
     return true;
 }
 
-DnaSequence& DnaSequence::operator=(const DnaSequence& obj)
+/*Dnasequence::Dnasequence(const char* cString)
 {
-    if(this==&obj)
-        return *this;
-    delete[] m_cstring_dna;
-    this->init(obj.cast_char());
-    return *this;
+    if(isValid(cString))
+    {
+        m_lenCstringDna = strlen(cString);
+        this->init(cString);
+    }
+}*/
+/*Dnasequence::Dnasequence(std::ifstream& myfile)
+{
+   std::string line;
+    if(myfile.is_open())
+    {
+        (getline(myfile,line));
+        new (this) Dnasequence(line);
+    }
+    else{
+        throw std::ios_base::failure("find not found");
+    }
+
+}*/
+
+Dnasequence::Dnasequence(const std::string& cString)
+{
+    if(isValid(cString.c_str()))
+    {
+        m_lenCstringDna = cString.length();
+        this->init(cString.c_str());
+    }
+
 }
 
-std::ostream& operator <<(std::ostream& cout, const DnaSequence& obj)
+Dnasequence::Dnasequence(const Dnasequence& obj)
 {
-    cout <<"The string is:"<<obj.cast_char()<<"\n";
-    cout <<"The len of string is:"<<obj.m_len_string_dna<<"\n";
+    m_lenCstringDna=obj.m_lenCstringDna;
+    this->init(obj.getAsChar());
+}
+
+
+Dnasequence::~Dnasequence(){
+    delete [] m_cstringDna;
+    m_cstringDna = NULL;
+}
+
+
+Dnasequence& Dnasequence::operator=(const Dnasequence& obj){
+    if(this == &obj)
+        return *this;
+    delete [] m_cstringDna;
+    m_lenCstringDna = obj.m_lenCstringDna;
+    this->init(obj.getAsChar());
+    return *this;
+
+}
+
+
+const char* Dnasequence::getAsChar()const{
+
+    return (char*)m_cstringDna;
+}
+
+
+void  Dnasequence::init(const char* cString)
+{
+    size_t i;
+    m_cstringDna =new Nucleotied[m_lenCstringDna+1];
+    for(i=0;i<m_lenCstringDna;i++)
+    {
+        m_cstringDna[i]= cString[i];
+    }
+}
+
+
+std::ostream& operator <<(std::ostream& cout,const Dnasequence &str1){
+    cout<<"the string: "<<str1.getAsChar()<<"\n";
     return cout;
 }
 
-size_t DnaSequence::length()const
+
+
+size_t Dnasequence::length()const
 {
-    return m_len_string_dna;
+    return m_lenCstringDna;
 }
 
-bool operator==(const DnaSequence& obj1, const DnaSequence& obj2)
+
+
+bool operator ==(const Dnasequence&obj, const Dnasequence&_obj)
 {
-    if(!strcmp(obj1.cast_char(), obj2.cast_char()))
-        return true;
-    return false;
+    return strcmp(obj.getAsChar(), _obj.getAsChar()) == 0;
 }
 
-bool operator!=(const DnaSequence& obj1, const DnaSequence& obj2)
-{
-    if (strcmp(obj1.cast_char(), obj2.cast_char()))
-        return true;
-    return false;
+
+bool operator !=(const Dnasequence&obj,const Dnasequence&_obj ) {
+    return strcmp(obj.getAsChar(), _obj.getAsChar()) != 0;
 }
 
-DnaSequence::Nucleotide::Nucleotide(char c)
+
+Dnasequence::Nucleotied&  Dnasequence::operator[](size_t index)const {
+    if (index > m_lenCstringDna - 1)
+        throw std::invalid_argument("index not valide");
+    return m_cstringDna[index];
+}
+Dnasequence Dnasequence::slice(size_t start, size_t last)const
 {
-    if(check_validation_nucleotide(c))
+    size_t j,i;
+
+    if(last>m_lenCstringDna)
+        last = m_lenCstringDna;
+
+    if(start>last)
+        throw std::invalid_argument("invalid index");
+
+    Dnasequence newDna(last-start);
+
+     for( i=start,j = 0; i<last;i++, j++){
+         newDna.m_cstringDna[j] = m_cstringDna[i];
+     }
+
+     return newDna;
+}
+Dnasequence::Dnasequence(size_t num):m_lenCstringDna(num){
+    m_cstringDna = new Nucleotied[num+1];
+
+}
+
+Dnasequence::Nucleotied Dnasequence::Nucleotied::match(){
+    if(m_c=='A')
+        return 'T';
+    if(m_c=='T')
+        return 'A';
+    if(m_c=='G')
+        return 'C';
+    return 'G';
+
+}
+Dnasequence Dnasequence::pairingDna(){
+
+    size_t j,i;
+
+    Dnasequence newDna(m_lenCstringDna);
+
+    for(i=0,j=m_lenCstringDna-1;i<m_lenCstringDna;i++,j--)
     {
-        m_c = c;
+        newDna[j] = m_cstringDna[i].match();
     }
+    return newDna;
+
 }
 
-DnaSequence::Nucleotide::Nucleotide():m_c('\0'){}
+size_t Dnasequence::find(const Dnasequence&obj,size_t index){
 
-char DnaSequence::Nucleotide::get_c()const
-{
-    return m_c;
+    std::string Dna = getAsChar();
+    std::string subDna = obj.getAsChar();
+    size_t index_= Dna.find(subDna,index);
+    if(index_ == std::string::npos)
+        return m_lenCstringDna;
+    return index_;
+
+
 }
-
-bool DnaSequence::Nucleotide::check_validation_nucleotide(const char str)
+size_t Dnasequence::count(const Dnasequence&obj)
+ {
+    return findall(obj).size();
+ }
+std::list<size_t > Dnasequence::findall(const Dnasequence&obj)
 {
-    if(str != 'A'  and str != 'C' and str != 'T' and str != 'G')
+    std::list<size_t > arr_indexes;
+    size_t index = find(obj);
+
+    while(index!=m_lenCstringDna)
     {
-        return false;
+        arr_indexes.push_back(index);
+        size_t temp = find(obj,index+1);
+        index = temp;
     }
-    return true;
-}
 
-const char* DnaSequence::cast_char()const
-{
-    return (char*)m_cstring_dna;
+    return arr_indexes;
 }
-
-DnaSequence::Nucleotide& DnaSequence::Nucleotide::operator=(char c)
+void Dnasequence::checkEndCodon(size_t index,std::list<Dnasequence >& listConsensusSequence,
+        std::list<size_t> endList)
 {
-    if(!check_validation_nucleotide(c))
+
+    for(std::list<size_t >::iterator i = endList.begin(); i != endList.end(); i++)
     {
-        throw std::invalid_argument("this value not match to dna");
+        if(index<*i&&(*i-index)%3 ==0)
+        {
+            listConsensusSequence.push_back(slice(index,*i+3));
+        }
     }
+
+
+}
+std::list<Dnasequence > Dnasequence::consensus()
+{
+    std::list<Dnasequence> listConsensusSequence;
+    std::list<size_t> listIndex = findall((std::string)"ATG");
+    std::list<size_t> b = findall((std::string)"TGA");
+    std::list<size_t> c = findall((std::string)"TAG");
+    std::list<size_t> a=findall((std::string)"TAA");;
+
+
+    for (std::list<size_t >::iterator i = listIndex.begin();i != listIndex.end(); i++) {
+
+        checkEndCodon(*i, listConsensusSequence, a);
+        checkEndCodon(*i, listConsensusSequence, b);
+        checkEndCodon(*i,listConsensusSequence,c);
+
+    }
+
+    return listConsensusSequence;
+}
+void Dnasequence::write(const Iwriter& obj)
+{
+    obj.write(getAsChar());
+
+}
+
+//class Nucleotid
+Dnasequence::Nucleotied::Nucleotied(char c):m_c(c){}
+
+
+Dnasequence::Nucleotied::Nucleotied():m_c('\0'){}
+
+
+
+Dnasequence::Nucleotied& Dnasequence::Nucleotied::operator=(char c){
+
+    if(!isValideChar(c))
+        throw std::invalid_argument( "invalid DNA2" );
     m_c = c;
     return *this;
 }
 
-DnaSequence::Nucleotide& DnaSequence::operator[](size_t index)const
-{
-    if(index > m_len_string_dna-1)
-    {
-        throw std::invalid_argument("this index out of range");
-    }
-    return m_cstring_dna[index];
-}
-
-DnaSequence DnaSequence::slice(size_t start, size_t end)
-{
-    if( end > m_len_string_dna)
-    {
-        end=m_len_string_dna;
-    }
-    if(start > end)
-    {
-        start = end ;
-    }
-    DnaSequence dna(end-start);
-    size_t i;
-    size_t j;
-    for(i=start, j=0; i < end ;i++, j++)
-    {
-        dna[j] = m_cstring_dna[i];
-    }
-    return dna;
-}
-
-DnaSequence DnaSequence::pairing()
-{
-    DnaSequence dna(m_len_string_dna);
-    size_t j;
-    size_t i;
-    for(i=0, j=m_len_string_dna-1; i < m_len_string_dna;i++, j--)
-    {
-        dna[i] = m_cstring_dna[j].match_pair();
-    }
-    return dna;
-}
-
-const DnaSequence::Nucleotide DnaSequence::Nucleotide::match_pair()
-{
-    if(m_c == 'G')
-        return 'C';
-    if(m_c =='C')
-        return 'G';
-    if(m_c =='T')
-        return 'A';
-    return 'T';
-}
-
-size_t DnaSequence::find(const DnaSequence& sub_dna)
-{
-    std::string strs(sub_dna.cast_char());
-    std::string strb(cast_char());
-    size_t index = strb.find(strs);
-    if(index == std::string::npos)
-    {
-        return m_len_string_dna;
-    }
-    return index;
+const char Dnasequence::Nucleotied::getChar()const{
+    return m_c;
 
 }
 
-size_t DnaSequence::count(const DnaSequence& sub_dna)
-{
-    return findAll(sub_dna).size();
+bool Dnasequence::Nucleotied::isValideChar(char c){
+    return c == 'A' || c == 'G' || c == 'T' || c == 'C';
 }
 
-std::list<size_t> DnaSequence::findAll(const DnaSequence& sub_dna)
+
+
+////reader//////
+Dnasequence::Dnasequence(const Ireader& obj)
 {
-    size_t i=0;
-    std::list<size_t> mylist;
-    size_t ind = find(sub_dna);
-    if(ind != m_len_string_dna)
-        mylist.push_back(ind);
-    size_t temp;
-    for(i=1;ind!= m_len_string_dna && i < m_len_string_dna; i++)
+    if(isValid(obj.get().c_str()))
     {
-        temp = slice(i, m_len_string_dna).find(sub_dna)+i;
-        if(ind != temp && temp!= m_len_string_dna)
-        {
-            mylist.push_back(temp);
-        }
-        ind = temp;
+        m_lenCstringDna = obj.get().length();
+        this->init(obj.get().c_str());
     }
-    return mylist;
-}
-
-void DnaSequence::write(const Iwriter& dna)
-{
-    dna.write(this->cast_char());
-}
-
-std::list<size_t> DnaSequence::FindConsensusSequences()
-{
-    std::list<size_t> mylist;
-    std::list<size_t> list_start_codon;
-    std::list<size_t> list_end1_codon;
-    std::list<size_t> list_end2_codon;
-    std::list<size_t> list_end3_codon;
-    list_start_codon = findAll(std::string("ATG"));
-    list_end1_codon = findAll(std::string("TAG"));
-    list_end2_codon = findAll(std::string("TAA"));
-    list_end2_codon = findAll(std::string("TGA"));
-    std::list<size_t>::iterator it;
-    it = list_end1_codon.end();
-    list_end1_codon.splice(it, list_end2_codon);
-    it = list_end1_codon.end();
-    list_end1_codon.splice(it, list_end3_codon);
-    for(std::list<size_t>::iterator iter = list_start_codon.begin(); iter!= list_start_codon.end();iter++)
-    {
-        for(std::list<size_t>::iterator iter1 = list_end1_codon.begin(); iter1!= list_end1_codon.end();iter1++)
-        {
-            if(*iter < *iter1 and (*iter1-*iter)%3==0)
-            {
-                mylist.push_back(*iter);
-            }
-
-        }
-    }
-    return mylist;
-}
-
-DnaSequence::DnaSequence(const Ireader& obj)
-{
-    if(!check_validation(obj.getData().c_str()))
-    {
-        throw std::invalid_argument("this value not match to dna");
-    }
-    m_len_string_dna = obj.getData().length();
-    this->init(obj.getData().c_str());
 }

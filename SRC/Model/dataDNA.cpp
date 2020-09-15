@@ -1,42 +1,74 @@
 //
 // Created by a on 7/5/20.
 //
-#include "DataDNA.h"
+#include "dataDNA.h"
+/*std::map<size_t ,Dna*>& dataDNA::getIdDNA()
+{
+    static std::map<size_t ,Dna*> m_mId;
+    return m_mId;
+}
+ std::map<std::string ,size_t>& dataDNA::getNameDNA()
+{
+    static std::map<std::string,size_t> m_mName;
+    return  m_mName;
+}*/
 
-std::map<size_t ,DNA*>& DataDNA::getDataDNAidtodna()
+//////function dataDna///////////////
+void dataDNA::addDna(Dna* newDna)
+{
+    m_mapIdDna.insert(std::pair<size_t, Dna*>(Dna::getId(),newDna));
+    m_mapNameDna.insert(std::pair<std::string, size_t>(newDna->getName(), Dna::getId()));
+
+}
+
+dataDNA::~dataDNA()
+{
+    std::map<size_t, Dna*>::iterator iter;
+    for(iter = m_mapIdDna.begin();iter!=m_mapIdDna.end();++iter)
+    {
+        delete iter->second;
+    }
+}
+
+
+/*std::map<size_t ,Dna*>& dataDNA::getMap()
 {
     return m_mapIdDna;
-}
+}*/
 
-void DataDNA::addDataDNAidtodna(DNA* dna)
-{
-    m_mapIdDna.insert(std::pair<size_t,DNA*>(DNA::getId(), dna));
-}
-
-void DataDNA::addDataDNAnametoid(std::string name)
-{
-    m_mapNameId.insert(std::pair<std::string, size_t>(name,DNA::getId()));
-}
-
-DNA* DataDNA::find(size_t id)
+Dna*dataDNA::findInIdMap(size_t id)
 {
     return m_mapIdDna[id];
 }
 
-bool DataDNA::isExist(std::string name)
+
+Dna*dataDNA::findInNameMap(const std::string& name)
 {
-    std::cout<<"555"<<name<<"%%5";
-    std::cout<<"Boool:"<<(m_mapNameId.find(name) != m_mapNameId.end())<<"\n";
-    return (m_mapNameId.find(name) != m_mapNameId.end());
+    return m_mapIdDna[m_mapNameDna[name]];
 }
 
-bool DataDNA::isExistId(size_t id)
+
+bool dataDNA::isexistName(const std::string& name)
 {
-    return (m_mapIdDna.find(id) != m_mapIdDna.end());
+    return m_mapNameDna.find(name)!=m_mapNameDna.end();
+
 }
 
-DNA* DataDNA::getNameDna(std::string name)
+bool dataDNA::isexistId(size_t id)
 {
-    return m_mapIdDna[m_mapNameId[name]];
+    return m_mapIdDna.find(id)!=m_mapIdDna.end();
+
 }
 
+
+/*std::map<StatusDna,Dna&> dataDNA::getStatusDNA()
+{
+    static std::map<StatusDna,Dna&> m_mStatus;
+    return m_mStatus;
+}*/
+
+
+size_t dataDNA::findIdByName(const std::string& name)
+{
+    return m_mapNameDna[name];
+}

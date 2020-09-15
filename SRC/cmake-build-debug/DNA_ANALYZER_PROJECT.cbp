@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="DNA_ANALYZER_PROJECT"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="DNA_ANALYZER_PROJECT">
+				<Option output="/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug/DNA_ANALYZER_PROJECT" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug/Makefile&quot;  VERBOSE=1 DNA_ANALYZER_PROJECT"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="DNA_ANALYZER_PROJECT/fast">
+				<Option output="/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug/DNA_ANALYZER_PROJECT" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug/Makefile&quot;  VERBOSE=1 DNA_ANALYZER_PROJECT/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/a/Documents/DNA-ANALYZER-PROJECT/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/Dna.cpp">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/Dna.h">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/Dup.cpp">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/Dup.h">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/Icommand.cpp">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/Icommand.h">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/IdDna.cpp">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/IdDna.h">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/ImanageDna.cpp">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/ImanageDna.h">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/Ireader.cpp">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/Ireader.h">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/Iwriter.cpp">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/Iwriter.h">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/Load.cpp">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/Load.h">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/Managecommand.cpp">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/Managecommand.h">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/NameDna.cpp">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/NameDna.h">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/Paramcommand.cpp">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/Paramcommand.h">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/Save.cpp">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/Save.h">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/StatusDna.cpp">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/StatusDna.h">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/System.cpp">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/System.h">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/Terminal.cpp">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/Terminal.h">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/Text.cpp">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/Text.h">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/dataDNA.cpp">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/dataDNA.h">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/dnasequence.cpp">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/dnasequence.h">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/main.cpp">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/rawDnaReader.cpp">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/rawDnaReader.h">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/rawDnaWriter.cpp">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/rawDnaWriter.h">
+			<Option target="DNA_ANALYZER_PROJECT"/>
+		</Unit>
+		<Unit filename="/home/a/Documents/DNA-ANALYZER-PROJECT/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

@@ -3,25 +3,28 @@
 //
 
 #include "Terminal.h"
-#include "Icommand.h"
-#include "ManageCommand.h"
-#include "DataDNA.h"
-
-void Terminal::start(Ireader& reader,const Iwriter& writer,DataDNA& dataDna)
+#include "../Controller/Paramcommand.h"
+#include "../Controller/Managecommand.h"
+#include "stdlib.h"
+int Terminal::start(const Iwriter& writer,Ireader& reader,dataDNA &containerDna)
 {
-    int flag=1;
-    while(flag)
-    {
+    Managecommand manageCommand;
+    while (1) {
         reader.read();
-        ParamCommand paramCommand(reader.getData());
-        try {
-            Icommand* icommand = ManageCommand::createCtorCommand(paramCommand);
-            icommand->run(writer,paramCommand,dataDna);
+        Paramcommand parameter(reader.get());
+        try{
+            Icommand *command = manageCommand.createcommand(parameter.getParam()[0]);
+            if(command==NULL)
+            {
+                return -1;
+            }
+            command->run(writer,containerDna, parameter);
         }
         catch(std::invalid_argument& e)
         {
-            std::cout<<e.what();
+            std::cout<<e.what()<<std::endl;
         }
 
     }
+
 }

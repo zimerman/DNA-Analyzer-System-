@@ -2,16 +2,20 @@
 // Created by a on 7/5/20.
 //
 
-#ifndef SRC_SYSTEM_H
-#define SRC_SYSTEM_H
+#ifndef DNDSEQUENCE_SYSTEM_H
+#define DNDSEQUENCE_SYSTEM_H
 
-#include "Ireader.h"
-#include "Iwriter.h"
+
+#include "../View/Iwriter.h"
+#include "../View/Ireader.h"
+#include "../View/UserInterface.h"
 
 class System {
+
 public:
-    void startApp(Ireader& reader,const Iwriter& writer);
+    void start(const Iwriter& writer, Ireader& reader,UserInterface* UI);
+
 };
 
 
-#endif //SRC_SYSTEM_H
+#endif //DNDSEQUENCE_SYSTEM_H

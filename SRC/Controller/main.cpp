@@ -1,13 +1,17 @@
-#include <iostream>
+//
+// Created by a on 7/5/20.
+//
 #include "System.h"
-#include "Iwriter.h"
-#include "Ireader.h"
+#include "../View/Iwriter.h"
+#include "../View/Ireader.h"
+#include "../View/Terminal.h"
 
-int main() {
-    std::cout << "Hello, World!" << std::endl;
-    KeyboardReader reads;
-    KeyBoardWriter writes;
-    System system1;
-    system1.startApp(reads,writes);
+int main()
+{
+    Consolewriter writer;
+    Consolereader reader;
+    System program;
+    Terminal terminal;
+    program.start(writer,reader,&terminal);
     return 0;
 }

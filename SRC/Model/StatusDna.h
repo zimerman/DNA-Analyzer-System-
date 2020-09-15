@@ -1,22 +1,23 @@
 //
-// Created by a on 7/7/20.
+// Created by a on 7/5/20.
 //
 
-#ifndef SRC_STATUS_H
-#define SRC_STATUS_H
+#ifndef DNDSEQUENCE_STATUSDNA_H
+#define DNDSEQUENCE_STATUSDNA_H
+
 
 #include <string>
 #include <list>
+#include <vector>
 
-class Status {
+class StatusDna {
 public:
-    Status(std::string str);
-    void setStatus(std::string status);
-    //std::string getStatus(){ return m_status;};
+    StatusDna(const std::string& status);
+    void setStatus(const std::string& status, size_t id);
 private:
     std::string m_status;
-    std::list<std::string> m_list_status;
+    static std::vector<std::string> m_statuslist;
 };
 
 
-#endif //SRC_STATUS_H
+#endif //DNDSEQUENCE_STATUSDNA_H

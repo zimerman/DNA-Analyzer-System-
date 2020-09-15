@@ -2,24 +2,25 @@
 // Created by a on 7/7/20.
 //
 
-#ifndef SRC_DUP_H
-#define SRC_DUP_H
+#ifndef DNDSEQUENCE_DUP_H
+#define DNDSEQUENCE_DUP_H
 
-
-#include "Ireader.h"
 #include "Icommand.h"
-#include "ParamCommand.h"
 
-class Dup: public Icreate {
+class Dup:public Icommand {
 public:
-    Dup(const ParamCommand& params);
-    void run(const Iwriter& writer,const ParamCommand& params,DataDNA& containerDna);
+//    Dup(const Paramcommand& obj);
+    /*virtual*/~Dup(){}
+    void run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& obj);
+
 private:
-    bool isValid(const ParamCommand& params);
-    void print(const Iwriter& writer,DataDNA& containerDna);
+    bool isValid(const Paramcommand& obj);
+    void print(const Iwriter& writer, dataDNA& containerDna);
+    Dna* dupByName(dataDNA&containerDna, const Paramcommand&param);
+    Dna* dupById(dataDNA&containerDna, const Paramcommand&param);
+
+
 };
 
 
-
-
-#endif //SRC_DUP_H
+#endif //DNDSEQUENCE_DUP_H
