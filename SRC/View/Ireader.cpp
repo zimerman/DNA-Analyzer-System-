@@ -39,7 +39,7 @@ void FileReaderRwadna::read()
     }
     else
     {
-        throw std::ios_base::failure("this file not exist");
+        throw std::ios_base::failure("This file does not exist\n");
     }
     data_file.close();
     m_data = line;

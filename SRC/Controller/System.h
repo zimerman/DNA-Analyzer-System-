@@ -9,8 +9,8 @@
 #include "Iwriter.h"
 
 class System {
-    public:
-        void startApp(Ireader& reader,const Iwriter& writer);
+public:
+    void startApp(Ireader& reader,const Iwriter& writer);
 };
 
 

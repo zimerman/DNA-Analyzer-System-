@@ -8,16 +8,16 @@
 #include <iostream>
 
 class Ireader {
-    public:
-        virtual std::string getData()const =0;
-        virtual void read()=0;
+public:
+    virtual std::string getData()const =0;
+    virtual void read()=0;
 private:
 };
 
 class DataReader:public Ireader
 {
-    protected:
-        std::string m_data;
+protected:
+    std::string m_data;
 };
 
 class FileReader:public DataReader
@@ -27,20 +27,20 @@ class FileReader:public DataReader
 
 class KeyboardReader:public DataReader
 {
-    public:
-        std::string getData()const;
-        void read();
-    private:
-        std::string m_name_file;
+public:
+    std::string getData()const;
+    void read();
+private:
+    std::string m_name_file;
 };
 
 class FileReaderTxt: public FileReader
 {
-    public:
-        FileReaderTxt(const std::string& myfile);
-        std::string getData()const;
-    private:
-        std::string m_name_file;
+public:
+    FileReaderTxt(const std::string& myfile);
+    std::string getData()const;
+private:
+    std::string m_name_file;
 
 };
 

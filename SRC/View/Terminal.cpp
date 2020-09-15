@@ -14,7 +14,7 @@ void Terminal::start(Ireader& reader,const Iwriter& writer,DataDNA& dataDna)
     {
         reader.read();
         ParamCommand paramCommand(reader.getData());
-        try{
+        try {
             Icommand* icommand = ManageCommand::createCtorCommand(paramCommand);
             icommand->run(writer,paramCommand,dataDna);
         }

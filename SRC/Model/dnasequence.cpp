@@ -9,7 +9,7 @@
 #include "stdlib.h"
 #include <list>
 
-DnaSequence::DnaSequence(const char* str)
+/*DnaSequence::DnaSequence(const char* str)
 {
     if(!check_validation(str)) {
         throw std::invalid_argument("this value not match to dna");
@@ -17,7 +17,7 @@ DnaSequence::DnaSequence(const char* str)
     m_len_string_dna = strlen(str);
     this->init(str);
 }
-
+*/
 DnaSequence::DnaSequence(size_t len)
 {
 
@@ -66,7 +66,6 @@ bool DnaSequence::check_validation(const char *str)
     {
         return false;
     }
-
     if(!(strspn(str, "ACTG")==strlen(str)))
     {
         return false;
@@ -159,56 +158,56 @@ DnaSequence::Nucleotide& DnaSequence::operator[](size_t index)const
 
 DnaSequence DnaSequence::slice(size_t start, size_t end)
 {
-	if( end > m_len_string_dna)
-	{
-		end=m_len_string_dna;
-	}
-	if(start > end)
-	{
-		start = end ;
-	}
-	DnaSequence dna(end-start);
-	size_t i;
-	size_t j;
-	for(i=start, j=0; i < end ;i++, j++)
-	{
-		dna[j] = m_cstring_dna[i];
-	}
-	return dna;
+    if( end > m_len_string_dna)
+    {
+        end=m_len_string_dna;
+    }
+    if(start > end)
+    {
+        start = end ;
+    }
+    DnaSequence dna(end-start);
+    size_t i;
+    size_t j;
+    for(i=start, j=0; i < end ;i++, j++)
+    {
+        dna[j] = m_cstring_dna[i];
+    }
+    return dna;
 }
 
 DnaSequence DnaSequence::pairing()
 {
-	DnaSequence dna(m_len_string_dna);
-	size_t j;
-	size_t i;
-	for(i=0, j=m_len_string_dna-1; i < m_len_string_dna;i++, j--)
-	{
-		dna[i] = m_cstring_dna[j].match_pair();
-	}
-	return dna;                   
+    DnaSequence dna(m_len_string_dna);
+    size_t j;
+    size_t i;
+    for(i=0, j=m_len_string_dna-1; i < m_len_string_dna;i++, j--)
+    {
+        dna[i] = m_cstring_dna[j].match_pair();
+    }
+    return dna;
 }
 
 const DnaSequence::Nucleotide DnaSequence::Nucleotide::match_pair()
 {
-	if(m_c == 'G')
-		return 'C';
-	if(m_c =='C')
-		return 'G';
-	if(m_c =='T')
-		return 'A';
-	return 'T';
+    if(m_c == 'G')
+        return 'C';
+    if(m_c =='C')
+        return 'G';
+    if(m_c =='T')
+        return 'A';
+    return 'T';
 }
 
 size_t DnaSequence::find(const DnaSequence& sub_dna)
 {
-	std::string strs(sub_dna.cast_char());
-	std::string strb(cast_char());
-	size_t index = strb.find(strs);
-	if(index == std::string::npos)
-	{
-	    return m_len_string_dna;
-	}
+    std::string strs(sub_dna.cast_char());
+    std::string strb(cast_char());
+    size_t index = strb.find(strs);
+    if(index == std::string::npos)
+    {
+        return m_len_string_dna;
+    }
     return index;
 
 }
@@ -250,10 +249,10 @@ std::list<size_t> DnaSequence::FindConsensusSequences()
     std::list<size_t> list_end1_codon;
     std::list<size_t> list_end2_codon;
     std::list<size_t> list_end3_codon;
-    list_start_codon = findAll("ATG");
-    list_end1_codon = findAll("TAG");
-    list_end2_codon = findAll("TAA");
-    list_end2_codon = findAll("TGA");
+    list_start_codon = findAll(std::string("ATG"));
+    list_end1_codon = findAll(std::string("TAG"));
+    list_end2_codon = findAll(std::string("TAA"));
+    list_end2_codon = findAll(std::string("TGA"));
     std::list<size_t>::iterator it;
     it = list_end1_codon.end();
     list_end1_codon.splice(it, list_end2_codon);
@@ -275,7 +274,6 @@ std::list<size_t> DnaSequence::FindConsensusSequences()
 
 DnaSequence::DnaSequence(const Ireader& obj)
 {
-    //new (this)DnaSequence(obj.getData());
     if(!check_validation(obj.getData().c_str()))
     {
         throw std::invalid_argument("this value not match to dna");

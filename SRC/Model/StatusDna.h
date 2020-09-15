@@ -11,6 +11,8 @@
 class Status {
 public:
     Status(std::string str);
+    void setStatus(std::string status);
+    //std::string getStatus(){ return m_status;};
 private:
     std::string m_status;
     std::list<std::string> m_list_status;

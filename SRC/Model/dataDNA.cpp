@@ -22,3 +22,21 @@ DNA* DataDNA::find(size_t id)
 {
     return m_mapIdDna[id];
 }
+
+bool DataDNA::isExist(std::string name)
+{
+    std::cout<<"555"<<name<<"%%5";
+    std::cout<<"Boool:"<<(m_mapNameId.find(name) != m_mapNameId.end())<<"\n";
+    return (m_mapNameId.find(name) != m_mapNameId.end());
+}
+
+bool DataDNA::isExistId(size_t id)
+{
+    return (m_mapIdDna.find(id) != m_mapIdDna.end());
+}
+
+DNA* DataDNA::getNameDna(std::string name)
+{
+    return m_mapIdDna[m_mapNameId[name]];
+}
+

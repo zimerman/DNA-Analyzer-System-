@@ -7,3 +7,9 @@ Status::Status(std::string str):m_status(str)
 {
     m_list_status.push_back(str);
 }
+
+
+void Status::setStatus(std::string status)
+{
+    m_status=status;
+}

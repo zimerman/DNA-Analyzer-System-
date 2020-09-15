@@ -8,9 +8,9 @@
 #include "DNA.h"
 class Icommand
 {
-    public:
-        Icommand(){};
-        virtual void run(const Iwriter& writer,const ParamCommand& params,DataDNA& containerDna)=0;
+public:
+    Icommand(){};
+    virtual void run(const Iwriter& writer,const ParamCommand& params,DataDNA& containerDna)=0;
 };
 
 class Icreate: public Icommand

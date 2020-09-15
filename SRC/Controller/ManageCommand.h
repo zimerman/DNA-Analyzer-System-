@@ -11,8 +11,8 @@
 #include "Save.h"
 class ManageCommand
 {
-    public:
-        static Icommand* createCtorCommand(const ParamCommand& pharams);
+public:
+    static Icommand* createCtorCommand(const ParamCommand& pharams);
 };
 
 
