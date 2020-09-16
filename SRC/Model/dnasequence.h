@@ -76,6 +76,8 @@ public:
 
     const char* getAsChar()const;
 
+    char* getAsCharNonConst();
+
     Dnasequence slice(size_t , size_t)const ;
 
     Dnasequence pairingDna();

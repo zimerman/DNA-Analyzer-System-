@@ -77,6 +77,10 @@ const char* Dnasequence::getAsChar()const{
     return (char*)m_cstringDna;
 }
 
+char* Dnasequence::getAsCharNonConst()
+{
+    return (char*)m_cstringDna;
+}
 
 void  Dnasequence::init(const char* cString)
 {
