@@ -38,6 +38,11 @@ Dna* Dup::dupByName(dataDNA&containerDna, const Paramcommand&param) {
 
     } else {
         dnaName = param.getParam()[2].substr(1);
+        if(containerDna.isexistName(dnaName))
+        {
+            return NULL;
+
+        }
     }
     Dna *newdna = new Dna(dnaName, "new", containerDna.findInNameMap(string)->getDna());
     return newdna;
@@ -48,9 +53,11 @@ Dna* Dup::dupById(dataDNA&containerDna, const Paramcommand&param)
     std::string dnaName;
     if(param.getParam().size()<3)
     {
-
+        dnaName = containerDna.findInIdMap(idDna)->getName()+"_"+castToString(containerDna.findInIdMap(idDna)->getCountName());
+        containerDna.findInIdMap(idDna)->setCountName();
         while(containerDna.isexistName(dnaName))
         {
+            std::cout<<"dup!!!!1";
             dnaName = containerDna.findInIdMap(idDna)->getName()+"_"+castToString(containerDna.findInIdMap(idDna)->getCountName());
             containerDna.findInIdMap(idDna)->setCountName();
         }
@@ -58,7 +65,12 @@ Dna* Dup::dupById(dataDNA&containerDna, const Paramcommand&param)
     }
     else
     {
-        dnaName = param.getParam()[2].substr(1);;
+        dnaName = param.getParam()[2].substr(1);
+        if(containerDna.isexistName(dnaName))
+        {
+            return NULL;
+
+        }
     }
     Dna* newdna = new Dna(dnaName, "new",containerDna.findInIdMap(idDna)->getDna());
     return newdna;
@@ -82,7 +94,13 @@ void Dup::run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& p
             std::cout<<"name of DNA not found";
             return;
         }
-        containerDna.addDna(dupByName(containerDna,param));
+        Dna* newDna = dupByName(containerDna,param);
+        if(!newDna)
+        {
+            writer.write("This name already Exists");
+            return;
+        }
+        containerDna.addDna(newDna);
 
     }
     else
@@ -93,7 +111,13 @@ void Dup::run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& p
             std::cout<<"id of DNA not found";
             return;
         }
-        containerDna.addDna(dupById(containerDna,param));
+        Dna* newDna = dupById(containerDna,param);
+        if(!newDna)
+        {
+            writer.write("This name already Exists");
+            return;
+        }
+        containerDna.addDna(newDna);
     }
 
     print(writer,containerDna);

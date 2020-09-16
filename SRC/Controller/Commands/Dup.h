@@ -18,8 +18,6 @@ private:
     void print(const Iwriter& writer, dataDNA& containerDna);
     Dna* dupByName(dataDNA&containerDna, const Paramcommand&param);
     Dna* dupById(dataDNA&containerDna, const Paramcommand&param);
-
-
 };
 
 
