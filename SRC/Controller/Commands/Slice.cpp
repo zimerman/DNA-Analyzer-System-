@@ -6,7 +6,7 @@
 #include "../../Model/dnasequence.h"
 bool Slice::isValid(const Paramcommand& param)
 {
-    return 4==param.getParam().size() && ((param.getParam()[1][0]=='@') || (param.getParam()[1][0]=='#'));
+    return (((4==param.getParam().size()) || (6==param.getParam().size() && param.getParam()[4][0]==':' && param.getParam()[5][0]=='@'))&& ((param.getParam()[1][0]=='@') || (param.getParam()[1][0]=='#')));
 }
 
 
@@ -17,6 +17,7 @@ void Slice::run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand&
     size_t from_ind = castToSize(param.getParam()[2]);
     size_t to_ind = castToSize(param.getParam()[3]);
     size_t idDna;
+    std::string NewdnaName;
     if(param.getParam()[1][0]=='@')
     {
         if(!containerDna.isexistName(param.getParam()[1].substr(1)))
@@ -26,6 +27,7 @@ void Slice::run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand&
         }
         idDna = containerDna.findIdByName(param.getParam()[1].substr(1));
     }
+
     else
     {
         idDna = castToSize(param.getParam()[1].substr(1));
@@ -35,11 +37,28 @@ void Slice::run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand&
             return;
         }
     }
+
     Dnasequence slice_dna = containerDna.findInIdMap(idDna)->getDna().slice(from_ind,to_ind+1);
-    std::cout<<slice_dna;
-    containerDna.findInIdMap(idDna)->setDnaSequence(slice_dna);
-    containerDna.findInIdMap(idDna)->getStatus().setStatus("modified", idDna);
-    print(writer,containerDna, idDna);
+
+    if(param.getParam().size() < 5)
+    {
+        containerDna.findInIdMap(idDna)->setDnaSequence(slice_dna);
+        containerDna.findInIdMap(idDna)->getStatus().setStatus("modified", idDna);
+        print(writer,containerDna, idDna);
+    }
+    else
+    {
+        NewdnaName = getName(idDna, "_s", containerDna, param.getParam()[5]);
+        if(NewdnaName.empty())
+        {
+            writer.write("This name already Exists");
+            return;
+        }
+        Dna* newdna = new Dna(NewdnaName, "new",slice_dna);
+        containerDna.addDna(newdna);
+        print(writer,containerDna, Dna::getId());
+    }
+
 }
 
 
