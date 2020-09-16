@@ -30,22 +30,21 @@ void Load::run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& 
     std::string filename=param.getParam()[1];
 
     std::string dnaName;
-
+    std::string string = param.getParam()[1].substr(0, param.getParam()[1].find(".rawdna"));
     if(param.getParam().size()<3)
     {
 
-        dnaName = param.getParam()[1];
-       if(containerDna.isexistName(dnaName))
-       {
-           dnaName=param.getParam()[1]+"_"+castToString(containerDna.findInNameMap(dnaName)->getCountName());
-
-       }
+//        dnaName = param.getParam()[1];
+        dnaName = param.getParam()[1].substr(0, param.getParam()[1].find(".rawdna"));
+//       if(containerDna.isexistName(dnaName))
+//       {
+//           dnaName=param.getParam()[1]+"_"+castToString(containerDna.findInNameMap(dnaName)->getCountName());
+//
+//       }
         while(containerDna.isexistName(dnaName))
         {
-
-            containerDna.findInNameMap(dnaName)->setCountName();
-            dnaName=param.getParam()[1]+"_"+castToString(containerDna.findInNameMap(dnaName)->getCountName());
-
+            dnaName = string+"_"+castToString(containerDna.findInNameMap(string)->getCountName());
+            containerDna.findInNameMap(string)->setCountName();
         }
 
     }
@@ -61,7 +60,7 @@ void Load::run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& 
         return;
 
     }
-    Dna* newdna = new Dna(dnaName,"new",myfile);
+    Dna* newdna = new Dna(dnaName.substr(0, dnaName.find(".rawdna")),"new",myfile);
     containerDna.addDna(newdna);
     print(writer,containerDna);
 
