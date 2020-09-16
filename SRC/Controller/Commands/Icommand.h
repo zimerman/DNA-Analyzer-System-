@@ -26,6 +26,8 @@ public:
 class Ichange:public Icommand{
 public:
     virtual ~Ichange(){};
+protected:
+    std::string getName(size_t idDna, const std::string& suffix, dataDNA& containerDna, const std::string& paramater);
 };
 
 
