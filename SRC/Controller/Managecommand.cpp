@@ -13,6 +13,8 @@ Managecommand::Managecommand()
     m_mapCommand.insert(std::pair<std::string, Icommand*>("dup",new Dup()));
     m_mapCommand.insert(std::pair<std::string, Icommand*>("save",new Save()));
     m_mapCommand.insert(std::pair<std::string, Icommand*>("slice",new Slice()));
+    m_mapCommand.insert(std::pair<std::string, Icommand*>("replace",new Replace()));
+    m_mapCommand.insert(std::pair<std::string, Icommand*>("len",new Len()));
 }
 
 Icommand* Managecommand::createcommand(const std::string& command)

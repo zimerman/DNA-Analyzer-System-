@@ -11,6 +11,8 @@
 #include "Commands/Save.h"
 #include "Commands/New.h"
 #include "Commands/Slice.h"
+#include "Commands/Replace.h"
+#include "Commands/Len.h"
 
 
 class Managecommand{
