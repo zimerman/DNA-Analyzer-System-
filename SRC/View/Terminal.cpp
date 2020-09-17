@@ -17,15 +17,18 @@ int Terminal::start(const Iwriter& writer,Ireader& reader,dataDNA &containerDna)
             Icommand *command = manageCommand.createcommand(parameter.getParam()[0]);
             if(command==NULL)
             {
-                return -1;
+                continue;
             }
             command->run(writer, reader, containerDna, parameter);
+
         }
         catch(std::invalid_argument& e)
         {
             std::cout<<e.what()<<std::endl;
         }
-
+        catch (const std::exception &e)
+        {
+            return -1;
+        }
     }
-
 }
