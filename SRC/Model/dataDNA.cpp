@@ -21,6 +21,14 @@ void dataDNA::addDna(Dna* newDna)
 
 }
 
+void dataDNA::delDna(size_t id)
+{
+    m_mapNameDna.erase(m_mapIdDna[id]->getName());
+    delete m_mapIdDna[id];
+    m_mapIdDna[id] = NULL;
+    m_mapIdDna.erase(id);
+}
+
 dataDNA::~dataDNA()
 {
     std::map<size_t, Dna*>::iterator iter;
@@ -71,4 +79,12 @@ bool dataDNA::isexistId(size_t id)
 size_t dataDNA::findIdByName(const std::string& name)
 {
     return m_mapNameDna[name];
+}
+
+
+void dataDNA::setName(size_t id, const std::string& newName)
+{
+    m_mapNameDna.erase(m_mapIdDna[id]->getName());
+    m_mapNameDna[newName] = id;
+    m_mapIdDna[id]->setName(newName);
 }
