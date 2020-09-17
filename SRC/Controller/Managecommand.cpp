@@ -21,20 +21,20 @@ Managecommand::Managecommand()
     m_mapCommand.insert(std::pair<std::string, Icommand*>("find",new Find()));
     m_mapCommand.insert(std::pair<std::string, Icommand*>("findall",new FindAll()));
     m_mapCommand.insert(std::pair<std::string, Icommand*>("count",new Count()));
+    m_mapCommand.insert(std::pair<std::string, Icommand*>("quit",new Quit()));
+
 }
 
 Icommand* Managecommand::createcommand(const std::string& command)
 {
-    if(command=="quit")
-    {
-        return NULL;
-    }
     std::map<std::string, Icommand*>::iterator indexCommand = m_mapCommand.find(command);
     if(indexCommand!=m_mapCommand.end())
     {
         return indexCommand->second;
     }
-    return NULL;
+    if(command.empty())
+        return NULL;
+    throw std::invalid_argument("command not found");
 }
 
 Managecommand::~Managecommand()

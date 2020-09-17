@@ -19,6 +19,7 @@
 #include "Commands/Find.h"
 #include "Commands/FindAll.h"
 #include "Commands/Count.h"
+#include "Commands/Quit.h"
 
 
 class Managecommand{
