@@ -8,10 +8,12 @@
 Dnasequence Replace::replace(const std::vector<std::string>& param,size_t lastIndex,dataDNA& containerDna,size_t idDna)
 {
     Dnasequence newDnaseq(containerDna.findInIdMap(idDna)->getDna());
-    for(size_t index = 2; index < lastIndex;index+=2)
+
+    for(size_t index = 2; index < lastIndex;index += 2)
     {
         newDnaseq.getAsCharNonConst()[castToSize(param[index])] = param[index+1][0];
     }
+
     return newDnaseq;
 }
 
@@ -19,30 +21,35 @@ Dnasequence Replace::replace(const std::vector<std::string>& param,size_t lastIn
 size_t Replace::getIndex(const std::vector<std::string>& param)
 {
     size_t index = 0;
+
     while(index < param.size() && param[index][0] != ':')
     {
         ++index;
     }
+
     return index;
 }
 
 bool Replace::isValid(const Paramcommand& param) {
+
     return (param.getParam()[1][0] == '@' || param.getParam()[1][0] == '#')
-    && (param.getParam().size() == 4 || (param.getParam().size() > 4 && param.getParam()[param.getParam().size()-1][0]=='@'));
+        && (param.getParam().size() == 4 || (param.getParam().size() > 4 && param.getParam()[param.getParam().size()-1][0]=='@'));
 }
 
-void Replace::run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& param)
+
+void Replace::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,const Paramcommand& param)
 {
     if(!isValid(param))
         throw std::invalid_argument("command not found");
     size_t index = getIndex(param.getParam());
     size_t idDna;
     std::string NewdnaName;
+
     if(param.getParam()[1][0]=='@')
     {
         if(!containerDna.isexistName(param.getParam()[1].substr(1)))
         {
-            std::cout<<"name of DNA not found";
+            writer.write("name of DNA not found");
             return;
         }
         idDna = containerDna.findIdByName(param.getParam()[1].substr(1));
@@ -53,7 +60,7 @@ void Replace::run(const Iwriter& writer, dataDNA& containerDna,const Paramcomman
         idDna = castToSize(param.getParam()[1].substr(1));
         if(!containerDna.isexistId(idDna))
         {
-            std::cout<<"id of DNA not found";
+            writer.write("id of DNA not found");
             return;
         }
     }
@@ -66,6 +73,7 @@ void Replace::run(const Iwriter& writer, dataDNA& containerDna,const Paramcomman
         containerDna.findInIdMap(idDna)->getStatus().setStatus("modified", idDna);
         print(writer,containerDna, idDna);
     }
+
     else
     {
         NewdnaName = getName(idDna, "_r", containerDna, param.getParam()[index+1]);
