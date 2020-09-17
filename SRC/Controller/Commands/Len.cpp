@@ -10,7 +10,7 @@ bool Len::isValid(const Paramcommand& param)
     return param.getParam().size() == 2 &&  param.getParam()[1][0] == '#';
 }
 
-void Len::run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& param)
+void Len::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,const Paramcommand& param)
 {
     if(!isValid(param))
         throw std::invalid_argument("command not found");

@@ -12,7 +12,7 @@ class Len: public ImanageDna{
 
 public:
     /*virtual*/~Len(){}
-    /*virtual*/void run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& param);
+    /*virtual*/void run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,const Paramcommand& param);
 
 private:
     bool isValid(const Paramcommand& param);
