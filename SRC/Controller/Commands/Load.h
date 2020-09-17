@@ -14,7 +14,7 @@ public:
 
 //    Load(const Paramcommand& param);
     /*virtual*/~Load(){}
-    void run(const Iwriter& writer,dataDNA& containerDna,const Paramcommand& obj);
+    void run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,const Paramcommand& obj);
 
 private:
 

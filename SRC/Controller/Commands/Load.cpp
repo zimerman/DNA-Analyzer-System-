@@ -21,7 +21,7 @@ bool Load::isValid(const Paramcommand& param)
 //}
 
 
-void Load::run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& param)
+void Load::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,const Paramcommand& param)
 {
     if(!isValid(param))
         throw std::invalid_argument("command not found");
