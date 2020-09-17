@@ -34,8 +34,12 @@ protected:
 class SequenceAnalysis:public Icommand {
 public:
     virtual ~SequenceAnalysis(){};
-protected:
-    std::string getName(size_t idDna, const std::string& suffix, dataDNA& containerDna, const std::string& paramater);
+};
+
+
+class ControlCommands:public Icommand{
+public:
+    virtual ~ControlCommands(){};
 };
 
 #endif //DNDSEQUENCE_ICOMMAND_H
