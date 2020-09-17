@@ -57,7 +57,6 @@ Dna* Dup::dupById(dataDNA&containerDna, const Paramcommand&param)
         containerDna.findInIdMap(idDna)->setCountName();
         while(containerDna.isexistName(dnaName))
         {
-            std::cout<<"dup!!!!1";
             dnaName = containerDna.findInIdMap(idDna)->getName()+"_"+castToString(containerDna.findInIdMap(idDna)->getCountName());
             containerDna.findInIdMap(idDna)->setCountName();
         }
@@ -76,7 +75,7 @@ Dna* Dup::dupById(dataDNA&containerDna, const Paramcommand&param)
     return newdna;
 }
 
-void Dup::run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& param)
+void Dup::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,const Paramcommand& param)
 {
     if(!isValid(param))
     {
@@ -91,7 +90,7 @@ void Dup::run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& p
     {
         if(!containerDna.isexistName(string))
         {
-            std::cout<<"name of DNA not found";
+            writer.write("name of DNA not found");
             return;
         }
         Dna* newDna = dupByName(containerDna,param);
@@ -108,13 +107,13 @@ void Dup::run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& p
 
         if(!containerDna.isexistId(idDna))
         {
-            std::cout<<"id of DNA not found";
+            writer.write("id of DNA not found\n");
             return;
         }
         Dna* newDna = dupById(containerDna,param);
         if(!newDna)
         {
-            writer.write("This name already Exists");
+            writer.write("This name already Exists\n");
             return;
         }
         containerDna.addDna(newDna);

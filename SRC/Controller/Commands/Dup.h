@@ -11,7 +11,7 @@ class Dup:public Icommand {
 public:
 //    Dup(const Paramcommand& obj);
     /*virtual*/~Dup(){}
-    void run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& obj);
+    void run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,const Paramcommand& obj);
 
 private:
     bool isValid(const Paramcommand& obj);
