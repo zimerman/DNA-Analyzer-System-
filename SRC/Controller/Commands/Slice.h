@@ -10,7 +10,7 @@
 class Slice: public Ichange {
 public:
     /*virtual*/~Slice(){};
-    void run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& param);
+    void run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,const Paramcommand& param);
 private:
     bool isValid(const Paramcommand& obj);
     void print(const Iwriter& writer, dataDNA& containerDna, size_t idDna);

@@ -10,7 +10,7 @@ bool Slice::isValid(const Paramcommand& param)
 }
 
 
-void Slice::run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& param)
+void Slice::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,const Paramcommand& param)
 {
     if(!isValid(param))
         throw std::invalid_argument("command not found");
@@ -22,7 +22,7 @@ void Slice::run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand&
     {
         if(!containerDna.isexistName(param.getParam()[1].substr(1)))
         {
-            std::cout<<"name of DNA not found";
+            writer.write("name of DNA not found");
             return;
         }
         idDna = containerDna.findIdByName(param.getParam()[1].substr(1));
@@ -33,7 +33,7 @@ void Slice::run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand&
         idDna = castToSize(param.getParam()[1].substr(1));
         if(!containerDna.isexistId(idDna))
         {
-            std::cout<<"id of DNA not found";
+            writer.write("id of DNA not found");
             return;
         }
     }
