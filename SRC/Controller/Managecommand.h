@@ -13,6 +13,12 @@
 #include "Commands/Slice.h"
 #include "Commands/Replace.h"
 #include "Commands/Len.h"
+#include "Commands/Del.h"
+#include "Commands/Rename.h"
+#include "Commands/ReEnum.h"
+#include "Commands/Find.h"
+#include "Commands/FindAll.h"
+#include "Commands/Count.h"
 
 
 class Managecommand{

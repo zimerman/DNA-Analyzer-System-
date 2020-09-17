@@ -15,6 +15,12 @@ Managecommand::Managecommand()
     m_mapCommand.insert(std::pair<std::string, Icommand*>("slice",new Slice()));
     m_mapCommand.insert(std::pair<std::string, Icommand*>("replace",new Replace()));
     m_mapCommand.insert(std::pair<std::string, Icommand*>("len",new Len()));
+    m_mapCommand.insert(std::pair<std::string, Icommand*>("del",new Del()));
+    m_mapCommand.insert(std::pair<std::string, Icommand*>("rename",new Rename()));
+    m_mapCommand.insert(std::pair<std::string, Icommand*>("reenum",new ReEnum()));
+    m_mapCommand.insert(std::pair<std::string, Icommand*>("find",new Find()));
+    m_mapCommand.insert(std::pair<std::string, Icommand*>("findall",new FindAll()));
+    m_mapCommand.insert(std::pair<std::string, Icommand*>("count",new Count()));
 }
 
 Icommand* Managecommand::createcommand(const std::string& command)
