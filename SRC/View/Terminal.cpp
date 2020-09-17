@@ -10,6 +10,7 @@ int Terminal::start(const Iwriter& writer,Ireader& reader,dataDNA &containerDna)
 {
     Managecommand manageCommand;
     while (1) {
+        std::cout<<"> cmd >>>"<<std::endl;
         reader.read();
         Paramcommand parameter(reader.get());
         try{
@@ -18,7 +19,7 @@ int Terminal::start(const Iwriter& writer,Ireader& reader,dataDNA &containerDna)
             {
                 return -1;
             }
-            command->run(writer,containerDna, parameter);
+            command->run(writer, reader, containerDna, parameter);
         }
         catch(std::invalid_argument& e)
         {
