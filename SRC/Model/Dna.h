@@ -20,6 +20,7 @@ public:
     size_t setCountName();
     StatusDna getStatus();
     void setDnaSequence(const Dnasequence& dnasequence);
+    void setName(const std::string& name);
 private:
     Dnasequence* m_Dna;
     std::string m_name;

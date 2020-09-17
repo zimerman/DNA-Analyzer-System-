@@ -30,3 +30,8 @@ void Dna::setDnaSequence(const Dnasequence& dnasequence)
 {
     *m_Dna = dnasequence;
 }
+
+void Dna::setName(const std::string& name)
+{
+    m_name = name;
+}
