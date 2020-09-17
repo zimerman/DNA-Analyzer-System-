@@ -14,6 +14,7 @@ std::string Consolereader::get()const
 
 void Consolereader::read()
 {
-    std::cout<<"> cmd >>>"<<std::endl;
     std::getline(std::cin, m_data,'\n');
 }
+
+
