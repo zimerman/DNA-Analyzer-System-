@@ -82,11 +82,11 @@ public:
 
     Dnasequence pairingDna();
 
-    size_t find(const Dnasequence &obj,size_t index=0);
+    size_t find(const Dnasequence &obj,size_t index=0)const;
 
-    std::list<size_t > findall(const Dnasequence &obj);
+    std::list<size_t > findall(const Dnasequence &obj)const;
 
-    size_t count(const Dnasequence &obj);
+    size_t count(const Dnasequence &obj)const;
 
     std::list<Dnasequence> consensus();
 

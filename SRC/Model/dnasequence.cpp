@@ -170,7 +170,7 @@ Dnasequence Dnasequence::pairingDna(){
 
 }
 
-size_t Dnasequence::find(const Dnasequence&obj,size_t index){
+size_t Dnasequence::find(const Dnasequence&obj,size_t index)const{
 
     std::string Dna = getAsChar();
     std::string subDna = obj.getAsChar();
@@ -178,14 +178,12 @@ size_t Dnasequence::find(const Dnasequence&obj,size_t index){
     if(index_ == std::string::npos)
         return m_lenCstringDna;
     return index_;
-
-
 }
-size_t Dnasequence::count(const Dnasequence&obj)
+size_t Dnasequence::count(const Dnasequence&obj)const
  {
     return findall(obj).size();
  }
-std::list<size_t > Dnasequence::findall(const Dnasequence&obj)
+std::list<size_t > Dnasequence::findall(const Dnasequence&obj)const
 {
     std::list<size_t > arr_indexes;
     size_t index = find(obj);
