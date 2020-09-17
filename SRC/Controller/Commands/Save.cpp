@@ -55,7 +55,7 @@ std::string Save::saveByName(dataDNA& containerDna, const Paramcommand&param)
 
 
 
-void Save::run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& param)
+void Save::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,const Paramcommand& param)
 {
     if(!isValid(param))
         throw std::invalid_argument("command not found");
@@ -66,7 +66,7 @@ void Save::run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& 
     {
         if(!containerDna.isexistName(param.getParam()[1].substr(1)))
         {
-            std::cout<<"name of DNA not found";
+            writer.write("name of DNA not found");
             return;
         }
         rawDnaWriter myfile(saveByName(containerDna,param));
@@ -78,7 +78,7 @@ void Save::run(const Iwriter& writer, dataDNA& containerDna,const Paramcommand& 
     {
         if(!containerDna.isexistId(castToSize(param.getParam()[1].substr(1))))
         {
-            std::cout<<"id of DNA not found";
+            writer.write("id of DNA not found");
             return;
         }
         rawDnaWriter myfile(saveById(containerDna,param));
