@@ -10,10 +10,10 @@
 class FindAll:public SequenceAnalysis {
 public:
     /*virtual*/~FindAll(){};
-    /*virtual*/void run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,const Paramcommand& param);
+    /*virtual*/std::string run(Iwriter &writer, Ireader& reader, dataDNA& containerDna, const Paramcommand& param);
 private:
     bool isValid(const Paramcommand& param);
-    void print(const Iwriter& writer, std::list<size_t>& listStrin);
+    std::string print(Iwriter& writer, std::list<size_t>& listStrin);
 };
 
 

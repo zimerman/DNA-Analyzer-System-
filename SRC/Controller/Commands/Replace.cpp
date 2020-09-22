@@ -37,7 +37,7 @@ bool Replace::isValid(const Paramcommand& param) {
 }
 
 
-void Replace::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,const Paramcommand& param)
+std::string Replace::run(Iwriter &writer, Ireader& reader, dataDNA& containerDna, const Paramcommand& param)
 {
     if(!isValid(param))
         throw std::invalid_argument("command not found");
@@ -49,8 +49,9 @@ void Replace::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,c
     {
         if(!containerDna.isexistName(param.getParam()[1].substr(1)))
         {
-            writer.write("name of DNA not found");
-            return;
+//            writer.write("name of DNA not found");
+//            return;
+            return "name of DNA not found";
         }
         idDna = containerDna.findIdByName(param.getParam()[1].substr(1));
     }
@@ -60,8 +61,9 @@ void Replace::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,c
         idDna = castToSize(param.getParam()[1].substr(1));
         if(!containerDna.isexistId(idDna))
         {
-            writer.write("id of DNA not found");
-            return;
+//            writer.write("id of DNA not found");
+//            return;
+            return "id of DNA not found";
         }
     }
 
@@ -71,7 +73,8 @@ void Replace::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,c
     {
         containerDna.findInIdMap(idDna)->setDnaSequence(replace_dna);
         containerDna.findInIdMap(idDna)->getStatus().setStatus("modified", idDna);
-        print(writer,containerDna, idDna);
+//        print(writer,containerDna, idDna);
+        return print(writer,containerDna, idDna);
     }
 
     else
@@ -79,18 +82,22 @@ void Replace::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,c
         NewdnaName = getName(idDna, "_r", containerDna, param.getParam()[index+1]);
         if(NewdnaName.empty())
         {
-            writer.write("This name already Exists");
-            return;
+//            writer.write("This name already Exists");
+//            return;
+            return "This name already Exists";
         }
         Dna* newdna = new Dna(NewdnaName, "new",replace_dna);
         containerDna.addDna(newdna);
-        print(writer,containerDna, Dna::getId());
+//        print(writer,containerDna, Dna::getId());
+        return print(writer,containerDna, Dna::getId());
+
     }
 }
 
 
-void Replace::print(const Iwriter& writer, dataDNA& containerDna, size_t idDna)
+std::string Replace::print(Iwriter& writer, dataDNA& containerDna, size_t idDna)
 {
     std::string strId = castToString(idDna);
-    writer.write("[" +strId+ "]"+ containerDna.findInIdMap(idDna)->getName()+":"+containerDna.findInIdMap(idDna)->getDna().getAsChar());
+//    writer.write("[" +strId+ "]"+ containerDna.findInIdMap(idDna)->getName()+":"+containerDna.findInIdMap(idDna)->getDna().getAsChar());
+    return "[" +strId+ "]"+ containerDna.findInIdMap(idDna)->getName()+":"+containerDna.findInIdMap(idDna)->getDna().getAsChar();
 }

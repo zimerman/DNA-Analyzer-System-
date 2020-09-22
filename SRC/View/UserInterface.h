@@ -6,11 +6,12 @@
 #define DNA_ANALYZER_PROJECT_USERINTERFACE_H
 
 #include "../Model/dataDNA.h"
-
+#include "../Controller/System.h"
+#include "../Controller/CallBack.h"
 class UserInterface {
 public:
-//    ~UserInterface();
-    virtual int start(const Iwriter& writer, Ireader& reader,dataDNA& containerDna)=0;
+    virtual ~UserInterface(){};
+    virtual void start(Iwriter& writer, Ireader& reader,dataDNA& containerDna, CallBack<System>& callBack)=0;
 };
 
 

@@ -14,6 +14,7 @@ class StatusDna {
 public:
     StatusDna(const std::string& status);
     void setStatus(const std::string& status, size_t id);
+    static std::vector<std::string>& getListStatus();
 private:
     std::string m_status;
     static std::vector<std::string> m_statuslist;

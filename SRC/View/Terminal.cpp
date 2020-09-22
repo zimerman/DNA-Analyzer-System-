@@ -5,30 +5,43 @@
 #include "Terminal.h"
 #include "../Controller/Paramcommand.h"
 #include "../Controller/Managecommand.h"
+
 #include "stdlib.h"
-int Terminal::start(const Iwriter& writer,Ireader& reader,dataDNA &containerDna)
+
+void Terminal::start(Iwriter& writer,Ireader& reader,dataDNA &containerDna, CallBack<System>& callBack)
 {
-    Managecommand manageCommand;
+    std::string result;
+    std::cout<<"\033[H\033[J";
     while (1) {
-        std::cout<<"> cmd >>>"<<std::endl;
+        writer.setColor("\033[1;31m\033[0m");
+//        writer.setColor("\033[1m\033[37m");
+//        writer.setColor("\033[1m\033[34m");
+        writer.write("> cmd >>>");
         reader.read();
         Paramcommand parameter(reader.get());
         try{
-            Icommand *command = manageCommand.createcommand(parameter.getParam()[0]);
-            if(command==NULL)
+            if (parameter.getParam()[0].empty())
             {
                 continue;
             }
-            command->run(writer, reader, containerDna, parameter);
+            result = callBack(writer, reader,containerDna, parameter);
+            if (!result.empty())
+            {
+                if (result == "quit")
+                {
+                    break;
+                }
+                writer.write(result);
+            }
 
         }
         catch(std::invalid_argument& e)
         {
-            std::cout<<e.what()<<std::endl;
+            writer.write(e.what());
         }
         catch (const std::exception &e)
         {
-            return -1;
+            writer.write(e.what());
         }
     }
 }

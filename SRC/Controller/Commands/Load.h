@@ -14,12 +14,12 @@ public:
 
 //    Load(const Paramcommand& param);
     /*virtual*/~Load(){}
-    void run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,const Paramcommand& obj);
+    std::string run(Iwriter &writer, Ireader& reader, dataDNA& containerDna, const Paramcommand& obj);
 
 private:
 
     bool isValid(const Paramcommand& obj);
-    void print(const Iwriter& writer, dataDNA& containerDna)const;
+    std::string print(Iwriter &writer, dataDNA& containerDna)const;
 
 };
 

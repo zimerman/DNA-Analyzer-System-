@@ -13,7 +13,7 @@ class Save: public ImanageDna{
 public:
     /*virtual*/~Save(){}
 //    Save(const Paramcommand& obj);
-    void run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,const Paramcommand& obj);
+    std::string run(Iwriter &writer, Ireader& reader, dataDNA& containerDna, const Paramcommand& obj);
 
 private:
     bool isValid(const Paramcommand& obj);

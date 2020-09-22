@@ -10,7 +10,7 @@ bool Count::isValid(const Paramcommand& param)
     return param.getParam().size() == 3 && (param.getParam()[1][0] == '@' || param.getParam()[1][0] == '#');
 }
 
-void Count::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,const Paramcommand& param)
+std::string Count::run(Iwriter &writer, Ireader& reader, dataDNA& containerDna, const Paramcommand& param)
 {
     if(!isValid(param))
         throw std::invalid_argument("command not found");
@@ -21,8 +21,9 @@ void Count::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,con
     {
         if(!containerDna.isexistName(param.getParam()[1].substr(1)))
         {
-            writer.write("name of DNA not found");
-            return;
+//            writer.write("name of DNA not found");
+//            return;
+            return "name of DNA not found";
         }
         idDnaOrginal = containerDna.findIdByName(param.getParam()[1].substr(1));
     }
@@ -32,16 +33,18 @@ void Count::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,con
         idDnaOrginal = castToSize(param.getParam()[1].substr(1));
         if(!containerDna.isexistId(idDnaOrginal))
         {
-            writer.write("id of DNA not found");
-            return;
+//            writer.write("id of DNA not found");
+//            return;
+              return "id of DNA not found";
         }
     }
     if(param.getParam()[2][0]=='@')
     {
         if(!containerDna.isexistName(param.getParam()[2].substr(1)))
         {
-            writer.write("name of DNA not found");
-            return;
+//            writer.write("name of DNA not found");
+//            return;
+            return "name of DNA not found";
         }
         idDnaSub = containerDna.findIdByName(param.getParam()[2].substr(1));
     }
@@ -51,8 +54,9 @@ void Count::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,con
         idDnaSub = castToSize(param.getParam()[2].substr(1));
         if(!containerDna.isexistId(idDnaSub))
         {
-            writer.write("id of DNA not found");
-            return;
+//            writer.write("id of DNA not found");
+//            return;
+            return "id of DNA not found";
         }
     }
     if(idDnaSub)
@@ -63,10 +67,11 @@ void Count::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,con
     {
         NumIndexFind = containerDna.findInIdMap(idDnaOrginal)->getDna().count(param.getParam()[2]);
     }
-    print(writer, castToString(NumIndexFind));
+    return castToString(NumIndexFind);
+//    print(writer, castToString(NumIndexFind));
 }
 
-void Count::print(const Iwriter& writer, const std::string& string)
-{
-    writer.write(string);
-}
+//void Count::print(const Iwriter& writer, const std::string& string)
+//{
+//    writer.write(string);
+//}

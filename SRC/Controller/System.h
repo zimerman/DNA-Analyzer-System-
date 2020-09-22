@@ -8,12 +8,15 @@
 
 #include "../View/Iwriter.h"
 #include "../View/Ireader.h"
-#include "../View/UserInterface.h"
+//#include "../View/UserInterface.h"
+#include "Paramcommand.h"
+class UserInterface;
+class dataDNA;
 
 class System {
-
 public:
-    void start(const Iwriter& writer, Ireader& reader,UserInterface* UI);
+    void start(Iwriter& writer, Ireader& reader,UserInterface& UI);
+    std::string exucteCommand(Iwriter& writer, Ireader& reader,dataDNA& containerDna, Paramcommand& parameter);
 
 };
 

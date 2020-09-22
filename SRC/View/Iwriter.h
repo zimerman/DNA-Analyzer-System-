@@ -10,7 +10,8 @@
 class Iwriter{
 
 public:
-  virtual void write(std::string data)const=0;
+    virtual void write(std::string data)const=0;
+    virtual void setColor(std::string color)=0;
 
 };
 
@@ -32,7 +33,9 @@ class Consolewriter:public Datawriter{
 
 public:
     void write(std::string data)const;
-
+    void setColor(std::string color);
+private:
+    std::string m_color;
 
 };
 

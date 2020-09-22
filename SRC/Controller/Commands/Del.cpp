@@ -5,7 +5,7 @@
 #include "Del.h"
 #include "../Auxiliaryfunctions.h"
 
-void Del::deleteDna(dataDNA& containerDna,size_t idDna,Ireader& reader,const Iwriter& writer)
+std::string Del::deleteDna(dataDNA& containerDna,size_t idDna,Ireader& reader,Iwriter& writer)
 {
     std::string result;
     writer.write("Do you really want to delete " + containerDna.findInIdMap(idDna)->getName() + ": " +
@@ -17,7 +17,7 @@ void Del::deleteDna(dataDNA& containerDna,size_t idDna,Ireader& reader,const Iwr
         result = reader.get();
         if (result == "Y" || result == "y")
         {
-            print(writer, containerDna, idDna);
+            return print(writer, containerDna, idDna);
             containerDna.delDna(idDna);
             break;
         }
@@ -30,6 +30,7 @@ void Del::deleteDna(dataDNA& containerDna,size_t idDna,Ireader& reader,const Iwr
             writer.write("You have typed an invalid response. Please either confirm by 'y'/'Y', or cancel by 'n'/'N'.");
         }
     }
+    return "";
 }
 
 
@@ -39,7 +40,7 @@ bool Del::isValid(const Paramcommand& param)
 }
 
 
-void Del::run(const Iwriter& writer,Ireader& reader, dataDNA& containerDna,const Paramcommand& param)
+std::string Del::run(Iwriter &writer, Ireader& reader, dataDNA& containerDna, const Paramcommand& param)
 {
     if(!isValid(param))
         throw std::invalid_argument("command not found");
@@ -48,8 +49,9 @@ void Del::run(const Iwriter& writer,Ireader& reader, dataDNA& containerDna,const
     {
         if(!containerDna.isexistName(param.getParam()[1].substr(1)))
         {
-            writer.write("name of DNA not found");
-            return;
+//            writer.write("name of DNA not found");
+//            return;
+            return "name of DNA not found";
         }
         idDna = containerDna.findIdByName(param.getParam()[1].substr(1));
     }
@@ -59,16 +61,20 @@ void Del::run(const Iwriter& writer,Ireader& reader, dataDNA& containerDna,const
         idDna = castToSize(param.getParam()[1].substr(1));
         if(!containerDna.isexistId(idDna))
         {
-            writer.write("id of DNA not found");
-            return;
+//            writer.write("id of DNA not found");
+//            return;
+            return "id of DNA not found";
         }
     }
     deleteDna(containerDna,idDna,reader,writer);
+    return "";
 }
 
 
-void Del::print(const Iwriter& writer, dataDNA& containerDna, size_t idDna)
+std::string Del::print(Iwriter& writer, dataDNA& containerDna, size_t idDna)
 {
     std::string strId = castToString(idDna);
-    writer.write("Deleted: [" +strId+ "]"+ containerDna.findInIdMap(idDna)->getName()+":"+containerDna.findInIdMap(idDna)->getDna().getAsChar());
+//    writer.write("Deleted: [" +strId+ "]"+ containerDna.findInIdMap(idDna)->getName()+":"+containerDna.findInIdMap(idDna)->getDna().getAsChar());
+    return "Deleted: [" +strId+ "]"+ containerDna.findInIdMap(idDna)->getName()+":"+containerDna.findInIdMap(idDna)->getDna().getAsChar();
+
 }

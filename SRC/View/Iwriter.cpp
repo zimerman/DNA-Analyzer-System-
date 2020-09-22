@@ -7,7 +7,13 @@
 #include <fstream>
 
 
-void Consolewriter::write( std::string data)const
+void Consolewriter::write(std::string data)const
 {
-    std::cout<<data<<std::endl;
+    std::cout<<m_color.substr(0,7)+data+m_color.substr(11)<<std::endl;
+//    std::cout<<m_color.substr(0,4)+data+m_color.substr(9)<<std::endl;
+}
+
+void Consolewriter::setColor(std::string color)
+{
+    m_color = color;
 }

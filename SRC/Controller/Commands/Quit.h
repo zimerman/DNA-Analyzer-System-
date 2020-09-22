@@ -11,10 +11,10 @@
 class Quit:public ControlCommands {
 public:
     /*virtual*/~Quit(){}
-    /*virtual*/void run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,const Paramcommand& param);
+    /*virtual*/std::string run(Iwriter &writer, Ireader& reader, dataDNA& containerDna, const Paramcommand& param);
 private:
     bool isValid(const Paramcommand& param);
-    void print(const Iwriter& writer, const std::string& string);
+    void print(Iwriter& writer, const std::string& string);
 };
 
 

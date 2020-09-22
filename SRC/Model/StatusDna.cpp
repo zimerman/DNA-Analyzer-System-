@@ -14,12 +14,16 @@ void StatusDna::setStatus(const std::string& status, size_t id)
 {
     m_status = status;
     m_statuslist[id-1] = status;
-    for (unsigned int i=0;i<m_statuslist.size();++i)
-    {
-        std::cout<<m_statuslist[i]<<"\n";
-    }
+//    for (unsigned int i=0;i<m_statuslist.size();++i)
+//    {
+//        std::cout<<m_statuslist[i]<<"\n";
+//    }
 }
 
+std::vector<std::string>& StatusDna::getListStatus()
+{
+    return m_statuslist;
+}
 
 
 

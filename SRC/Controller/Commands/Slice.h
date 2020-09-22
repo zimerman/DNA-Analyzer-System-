@@ -10,10 +10,10 @@
 class Slice: public Ichange {
 public:
     /*virtual*/~Slice(){};
-    void run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,const Paramcommand& param);
+    std::string run(Iwriter &writer, Ireader& reader, dataDNA& containerDna, const Paramcommand& param);
 private:
     bool isValid(const Paramcommand& obj);
-    void print(const Iwriter& writer, dataDNA& containerDna, size_t idDna);
+    std::string print(Iwriter& writer, dataDNA& containerDna, size_t idDna);
 };
 
 

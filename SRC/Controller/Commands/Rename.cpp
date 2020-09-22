@@ -10,7 +10,7 @@ bool Rename::isValid(const Paramcommand& param)
     return param.getParam().size() == 3 && (param.getParam()[1][0] == '@' || param.getParam()[1][0] == '#') && param.getParam()[2][0] == '@';
 }
 
-void Rename::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,const Paramcommand& param)
+std::string Rename::run(Iwriter &writer, Ireader& reader, dataDNA& containerDna, const Paramcommand& param)
 {
     if(!isValid(param))
         throw std::invalid_argument("command not found");
@@ -19,8 +19,9 @@ void Rename::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,co
     {
         if(!containerDna.isexistName(param.getParam()[1].substr(1)))
         {
-            writer.write("name of DNA not found");
-            return;
+//            writer.write("name of DNA not found");
+//            return;
+            return "name of DNA not found";
         }
         idDna = containerDna.findIdByName(param.getParam()[1].substr(1));
     }
@@ -30,12 +31,14 @@ void Rename::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,co
         idDna = castToSize(param.getParam()[1].substr(1));
         if(!containerDna.isexistId(idDna))
         {
-            writer.write("id of DNA not found");
-            return;
+//            writer.write("id of DNA not found");
+//            return;
+            return "id of DNA not found";
         }
     }
-    std::cout<<containerDna.findInIdMap(idDna)->getName();
-    std::cout<<param.getParam()[2].substr(1)<<"\n";
+//    std::cout<<containerDna.findInIdMap(idDna)->getName();
+//    std::cout<<param.getParam()[2].substr(1)<<"\n";
     containerDna.setName(idDna, param.getParam()[2].substr(1));
+    return "";
 }
 

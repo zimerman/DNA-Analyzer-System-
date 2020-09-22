@@ -11,7 +11,7 @@ bool FindAll::isValid(const Paramcommand& param)
 }
 
 
-void FindAll::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,const Paramcommand& param)
+std::string FindAll::run(Iwriter &writer, Ireader& reader, dataDNA& containerDna, const Paramcommand& param)
 {
     if(!isValid(param))
         throw std::invalid_argument("command not found");
@@ -22,8 +22,9 @@ void FindAll::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,c
     {
         if(!containerDna.isexistName(param.getParam()[1].substr(1)))
         {
-            writer.write("name of DNA not found");
-            return;
+//            writer.write("name of DNA not found");
+//            return;
+            return "name of DNA not found";
         }
         idDnaOrginal = containerDna.findIdByName(param.getParam()[1].substr(1));
     }
@@ -33,16 +34,18 @@ void FindAll::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,c
         idDnaOrginal = castToSize(param.getParam()[1].substr(1));
         if(!containerDna.isexistId(idDnaOrginal))
         {
-            writer.write("id of DNA not found");
-            return;
+//            writer.write("id of DNA not found");
+//            return;
+            return "id of DNA not found";
         }
     }
     if(param.getParam()[2][0]=='@')
     {
         if(!containerDna.isexistName(param.getParam()[2].substr(1)))
         {
-            writer.write("name of DNA not found");
-            return;
+//            writer.write("name of DNA not found");
+//            return;
+            return "name of DNA not found";
         }
         idDnaSub = containerDna.findIdByName(param.getParam()[2].substr(1));
     }
@@ -52,8 +55,9 @@ void FindAll::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,c
         idDnaSub = castToSize(param.getParam()[2].substr(1));
         if(!containerDna.isexistId(idDnaSub))
         {
-            writer.write("id of DNA not found");
-            return;
+//            writer.write("id of DNA not found");
+//            return;
+            return "id of DNA not found";
         }
     }
     if(idDnaSub)
@@ -64,18 +68,25 @@ void FindAll::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,c
     {
         listIndexFind = containerDna.findInIdMap(idDnaOrginal)->getDna().findall(param.getParam()[2]);
     }
-
-    if(*(listIndexFind.begin()) == containerDna.findInIdMap(idDnaOrginal)->getDna().length())
+    if(listIndexFind.empty())
     {
-        writer.write("this subsequence not in sequence");
-        return;
+        return "this subsequence not in sequence";
     }
-    print(writer, listIndexFind);
+//    std::cout<<*(listIndexFind.begin());
+//    if(*(listIndexFind.begin()) == containerDna.findInIdMap(idDnaOrginal)->getDna().length())
+//    {
+//        writer.write("this subsequence not in sequence");
+//        return;
+//        return "this subsequence not in sequence";
+//    }
+    return print(writer, listIndexFind);
 }
 
 
-void FindAll::print(const Iwriter& writer, std::list<size_t>& listString)
+std::string FindAll::print(Iwriter& writer, std::list<size_t>& listString)
 {
+    std::string result;
     for (std::list<size_t>::iterator it = listString.begin(); it != listString.end(); it++)
-        writer.write(castToString(*it));
+        result += castToString(*it)+" ";
+    return result;
 }

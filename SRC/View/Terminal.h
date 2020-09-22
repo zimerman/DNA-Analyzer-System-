@@ -12,7 +12,8 @@
 
 class Terminal:public UserInterface{
 public:
-    int start(const Iwriter& writer, Ireader& reader,dataDNA& containerDna);
+    ~Terminal(){};
+    void start(Iwriter& writer, Ireader& reader,dataDNA& containerDna, CallBack<System>& callBack);
 };
 
 

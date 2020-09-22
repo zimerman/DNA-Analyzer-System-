@@ -75,7 +75,7 @@ Dna* Dup::dupById(dataDNA&containerDna, const Paramcommand&param)
     return newdna;
 }
 
-void Dup::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,const Paramcommand& param)
+std::string Dup::run(Iwriter &writer, Ireader& reader, dataDNA& containerDna, const Paramcommand& param)
 {
     if(!isValid(param))
     {
@@ -90,14 +90,16 @@ void Dup::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,const
     {
         if(!containerDna.isexistName(string))
         {
-            writer.write("name of DNA not found");
-            return;
+//            writer.write("name of DNA not found");
+//            return;
+            return "name of DNA not found";
         }
         Dna* newDna = dupByName(containerDna,param);
         if(!newDna)
         {
-            writer.write("This name already Exists");
-            return;
+//            writer.write("This name already Exists");
+//            return;
+            return "This name already Exists";
         }
         containerDna.addDna(newDna);
 
@@ -107,26 +109,28 @@ void Dup::run(const Iwriter& writer, Ireader& reader,dataDNA& containerDna,const
 
         if(!containerDna.isexistId(idDna))
         {
-            writer.write("id of DNA not found\n");
-            return;
+//            writer.write("id of DNA not found\n");
+//            return;
+            return "id of DNA not found";
         }
         Dna* newDna = dupById(containerDna,param);
         if(!newDna)
         {
-            writer.write("This name already Exists\n");
-            return;
+//            writer.write("This name already Exists\n");
+//            return;
+            return "This name already Exists";
         }
         containerDna.addDna(newDna);
     }
-
-    print(writer,containerDna);
+    return print(writer,containerDna);
 
 }
 
-void Dup::print(const Iwriter& writer, dataDNA& containerDna)
+std::string Dup::print(Iwriter& writer, dataDNA& containerDna)
 {
 
     std::string strId1 = castToString(containerDna.findInIdMap(Dna::getId())->getId());
-    writer.write("[" +strId1+ "]"+ containerDna.findInIdMap(Dna::getId())->getName()+":"+containerDna.findInIdMap(Dna::getId())->getDna().getAsChar());
+//    writer.write("[" +strId1+ "]"+ containerDna.findInIdMap(Dna::getId())->getName()+":"+containerDna.findInIdMap(Dna::getId())->getDna().getAsChar());
+    return "[" +strId1+ "]"+ containerDna.findInIdMap(Dna::getId())->getName()+":"+containerDna.findInIdMap(Dna::getId())->getDna().getAsChar();
 
 }

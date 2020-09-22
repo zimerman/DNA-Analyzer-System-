@@ -15,7 +15,6 @@
 #include "Commands/Len.h"
 #include "Commands/Del.h"
 #include "Commands/Rename.h"
-#include "Commands/ReEnum.h"
 #include "Commands/Find.h"
 #include "Commands/FindAll.h"
 #include "Commands/Count.h"
@@ -25,12 +24,13 @@
 class Managecommand{
 
 public:
-     Managecommand();
-     ~Managecommand();
-     Icommand* createcommand(const std::string& command);
+//     Managecommand();
+//     ~Managecommand();
+     static void initCommands();
+     static Icommand* createcommand(const std::string& command);
 
 private:
-     std::map<std::string, Icommand*> m_mapCommand;
+     static std::map<std::string, Icommand*> m_mapCommand;
 };
 
 

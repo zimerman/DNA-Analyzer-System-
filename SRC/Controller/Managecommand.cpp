@@ -6,7 +6,25 @@
 #include <stdlib.h>
 //#include <string.h>
 
-Managecommand::Managecommand()
+//Managecommand::Managecommand()
+//{
+//    m_mapCommand.insert(std::pair<std::string, Icommand*>("new",new New()));
+//    m_mapCommand.insert(std::pair<std::string, Icommand*>("load",new Load()));
+//    m_mapCommand.insert(std::pair<std::string, Icommand*>("dup",new Dup()));
+//    m_mapCommand.insert(std::pair<std::string, Icommand*>("save",new Save()));
+//    m_mapCommand.insert(std::pair<std::string, Icommand*>("slice",new Slice()));
+//    m_mapCommand.insert(std::pair<std::string, Icommand*>("replace",new Replace()));
+//    m_mapCommand.insert(std::pair<std::string, Icommand*>("len",new Len()));
+//    m_mapCommand.insert(std::pair<std::string, Icommand*>("del",new Del()));
+//    m_mapCommand.insert(std::pair<std::string, Icommand*>("rename",new Rename()));
+//    m_mapCommand.insert(std::pair<std::string, Icommand*>("find",new Find()));
+//    m_mapCommand.insert(std::pair<std::string, Icommand*>("findall",new FindAll()));
+//    m_mapCommand.insert(std::pair<std::string, Icommand*>("count",new Count()));
+//    m_mapCommand.insert(std::pair<std::string, Icommand*>("quit",new Quit()));
+//
+//}
+std::map<std::string, Icommand*> Managecommand::m_mapCommand;
+void Managecommand::initCommands()
 {
     m_mapCommand.insert(std::pair<std::string, Icommand*>("new",new New()));
     m_mapCommand.insert(std::pair<std::string, Icommand*>("load",new Load()));
@@ -17,13 +35,12 @@ Managecommand::Managecommand()
     m_mapCommand.insert(std::pair<std::string, Icommand*>("len",new Len()));
     m_mapCommand.insert(std::pair<std::string, Icommand*>("del",new Del()));
     m_mapCommand.insert(std::pair<std::string, Icommand*>("rename",new Rename()));
-    m_mapCommand.insert(std::pair<std::string, Icommand*>("reenum",new ReEnum()));
     m_mapCommand.insert(std::pair<std::string, Icommand*>("find",new Find()));
     m_mapCommand.insert(std::pair<std::string, Icommand*>("findall",new FindAll()));
     m_mapCommand.insert(std::pair<std::string, Icommand*>("count",new Count()));
     m_mapCommand.insert(std::pair<std::string, Icommand*>("quit",new Quit()));
-
 }
+
 
 Icommand* Managecommand::createcommand(const std::string& command)
 {
@@ -32,19 +49,18 @@ Icommand* Managecommand::createcommand(const std::string& command)
     {
         return indexCommand->second;
     }
-    if(command.empty())
-        return NULL;
+
     throw std::invalid_argument("command not found");
 }
 
-Managecommand::~Managecommand()
-{
-    std::map<std::string, Icommand*>::iterator iter;
-    for(iter = m_mapCommand.begin();iter!=m_mapCommand.end();++iter)
-    {
-        delete iter->second;
-    }
-}
+//Managecommand::~Managecommand()
+//{
+//    std::map<std::string, Icommand*>::iterator iter;
+//    for(iter = m_mapCommand.begin();iter!=m_mapCommand.end();++iter)
+//    {
+//        delete iter->second;
+//    }
+//}
 
 //        if(param.getParam()[0]=="new")
 //        {
