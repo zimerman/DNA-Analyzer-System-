@@ -66,8 +66,8 @@ std::string Del::run(Iwriter &writer, Ireader& reader, dataDNA& containerDna, co
             return "id of DNA not found";
         }
     }
-    deleteDna(containerDna,idDna,reader,writer);
-    return "";
+    return deleteDna(containerDna,idDna,reader,writer);
+//    return "";
 }
 
 
