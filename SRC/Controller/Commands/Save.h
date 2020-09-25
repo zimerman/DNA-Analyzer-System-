@@ -1,27 +1,18 @@
-//
-// Created by a on 7/6/20.
-//
-
 #ifndef DNDSEQUENCE_SAVE_H
 #define DNDSEQUENCE_SAVE_H
-
 #include "../ImanageDna.h"
 #include "../../View/rawDnaWriter.h"
 
-class Save: public ImanageDna{
 
-public:
-    /*virtual*/~Save(){}
-//    Save(const Paramcommand& obj);
-    std::string run(Iwriter &writer, Ireader& reader, dataDNA& containerDna, const Paramcommand& obj);
+class Save: public ImanageDna
+{
+    public:
+        /*virtual*/~Save(){}
+        std::string run(Iwriter &writer, Ireader& reader, dataDNA& containerDna, const Paramcommand& obj);
 
-private:
-    bool isValid(const Paramcommand& obj);
-    //void print(const Iwriter& writer, dataDNA& containerDna);
-    std::string saveById(dataDNA& containerDna,const Paramcommand&param);
-    std::string saveByName(dataDNA& containerDna, const Paramcommand&param);
-
-
+    private:
+        bool isValid(const Paramcommand& obj);
+        std::string save(dataDNA& containerDna,const Paramcommand&param, size_t idDna);
 };
 
 

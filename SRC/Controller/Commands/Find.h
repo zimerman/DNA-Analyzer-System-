@@ -1,19 +1,16 @@
-//
-// Created by a on 9/16/20.
-//
-
 #ifndef DNA_ANALYZER_PROJECT_FIND_H
 #define DNA_ANALYZER_PROJECT_FIND_H
-
 #include "Icommand.h"
 
-class Find:public SequenceAnalysis {
-public:
-    /*virtual*/~Find(){};
-    /*virtual*/std::string run(Iwriter &writer, Ireader& reader, dataDNA& containerDna, const Paramcommand& param);
-private:
-    bool isValid(const Paramcommand& param);
-//    void print(const Iwriter& writer, const std::string& string);
+
+class Find:public SequenceAnalysis
+{
+    public:
+        /*virtual*/~Find(){};
+        /*virtual*/std::string run(Iwriter &writer, Ireader& reader, dataDNA& containerDna, const Paramcommand& param);
+
+    private:
+        bool isValid(const Paramcommand& param);
 };
 
 
