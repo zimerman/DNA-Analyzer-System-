@@ -1,11 +1,8 @@
-//
-// Created by a on 6/1/20.
-//
-
 #include "dnasequence.h"
 #include <cstring>
 #include "string"
 #include "vector"
+
 
 bool Dnasequence::isValid(const char* str)
 {
@@ -16,27 +13,6 @@ bool Dnasequence::isValid(const char* str)
     return true;
 }
 
-/*Dnasequence::Dnasequence(const char* cString)
-{
-    if(isValid(cString))
-    {
-        m_lenCstringDna = strlen(cString);
-        this->init(cString);
-    }
-}*/
-/*Dnasequence::Dnasequence(std::ifstream& myfile)
-{
-   std::string line;
-    if(myfile.is_open())
-    {
-        (getline(myfile,line));
-        new (this) Dnasequence(line);
-    }
-    else{
-        throw std::ios_base::failure("find not found");
-    }
-
-}*/
 
 Dnasequence::Dnasequence(const std::string& cString)
 {
@@ -47,6 +23,7 @@ Dnasequence::Dnasequence(const std::string& cString)
     }
 
 }
+
 
 Dnasequence::Dnasequence(const Dnasequence& obj)
 {
@@ -77,10 +54,12 @@ const char* Dnasequence::getAsChar()const{
     return (char*)m_cstringDna;
 }
 
+
 char* Dnasequence::getAsCharNonConst()
 {
     return (char*)m_cstringDna;
 }
+
 
 void  Dnasequence::init(const char* cString)
 {
@@ -97,7 +76,6 @@ std::ostream& operator <<(std::ostream& cout,const Dnasequence &str1){
     cout<<"the string: "<<str1.getAsChar()<<"\n";
     return cout;
 }
-
 
 
 size_t Dnasequence::length()const
