@@ -1,6 +1,6 @@
 #ifndef DNDSEQUENCE_SAVE_H
 #define DNDSEQUENCE_SAVE_H
-#include "../ImanageDna.h"
+#include "Icommand.h"
 #include "../../View/rawDnaWriter.h"
 
 

@@ -31,17 +31,24 @@ class Ichange:public Icommand
 };
 
 
-class SequenceAnalysis:public Icommand
+class IsequenceAnalysis: public Icommand
 {
     public:
-        virtual ~SequenceAnalysis(){};
+        virtual ~IsequenceAnalysis(){};
 };
 
 
-class ControlCommands:public Icommand
+class IcontrolCommands: public Icommand
 {
     public:
-        virtual ~ControlCommands(){};
+        virtual ~IcontrolCommands(){};
+};
+
+
+class ImanageDna: public Icommand
+{
+public:
+    virtual ~ImanageDna(){}
 };
 
 

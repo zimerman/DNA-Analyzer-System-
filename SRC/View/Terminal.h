@@ -1,8 +1,5 @@
 #ifndef DNDSEQUENCE_TERMINAL_H
 #define DNDSEQUENCE_TERMINAL_H
-#include "Ireader.h"
-#include "Iwriter.h"
-#include "../Model/dataDNA.h"
 #include "UserInterface.h"
 
 

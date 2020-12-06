@@ -3,7 +3,7 @@
 #include "Icommand.h"
 
 
-class Find:public SequenceAnalysis
+class Find:public IsequenceAnalysis
 {
     public:
         /*virtual*/~Find(){};

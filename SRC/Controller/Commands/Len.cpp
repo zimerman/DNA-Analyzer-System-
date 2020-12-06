@@ -13,6 +13,11 @@ std::string Len::run(Iwriter &writer, Ireader& reader, dataDNA& containerDna, co
     if(!isValid(param))
         throw std::invalid_argument("command not found");
 
+    if(!containerDna.isexistId(castToSize(param.getParam()[1].substr(1))))
+    {
+        return "DNA not found";
+    }
+
     size_t len = containerDna.findInIdMap(castToSize(param.getParam()[1].substr(1)))->getDna().length();
 
     return castToString(len);

@@ -1,10 +1,9 @@
 #ifndef DNA_ANALYZER_PROJECT_HELP_H
 #define DNA_ANALYZER_PROJECT_HELP_H
-#include "../Paramcommand.h"
 #include "Icommand.h"
 
 
-class Help:public ControlCommands
+class Help:public IcontrolCommands
 {
     public:
         /*virtual*/~Help(){}

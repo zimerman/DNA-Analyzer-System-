@@ -1,6 +1,5 @@
 #ifndef DNDSEQUENCE_LOAD_H
 #define DNDSEQUENCE_LOAD_H
-#include "../Paramcommand.h"
 #include "Icommand.h"
 
 

@@ -2,7 +2,6 @@
 #define DNDSEQUENCE_DATADNA_H
 #include <map>
 #include "Dna.h"
-#include "StatusDna.h"
 
 
 class dataDNA

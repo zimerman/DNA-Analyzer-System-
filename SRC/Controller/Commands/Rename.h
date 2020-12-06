@@ -1,7 +1,6 @@
 #ifndef DNA_ANALYZER_PROJECT_RENAME_H
 #define DNA_ANALYZER_PROJECT_RENAME_H
 #include "Icommand.h"
-#include "../ImanageDna.h"
 
 
 class Rename:public ImanageDna

@@ -1,8 +1,5 @@
 #ifndef DNDSEQUENCE_SYSTEM_H
 #define DNDSEQUENCE_SYSTEM_H
-#include "../View/Iwriter.h"
-#include "../View/Ireader.h"
-#include "Paramcommand.h"
 #include "Managecommand.h"
 
 class UserInterface;

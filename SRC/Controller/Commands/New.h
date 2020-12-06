@@ -1,7 +1,6 @@
 #ifndef DNA_ANALYZER_PROJECT_NEW_H
 #define DNA_ANALYZER_PROJECT_NEW_H
-#include "../ImanageDna.h"
-#include "../../View/rawDnaWriter.h"
+#include "Icommand.h"
 
 
 class New:public Icreate

@@ -1,6 +1,6 @@
 #ifndef DNA_ANALYZER_PROJECT_DEL_H
 #define DNA_ANALYZER_PROJECT_DEL_H
-#include "../ImanageDna.h"
+#include "Icommand.h"
 #include "../../View/rawDnaWriter.h"
 
 class Del: public ImanageDna

@@ -1,11 +1,9 @@
 #ifndef DNA_ANALYZER_PROJECT_LIST_H
 #define DNA_ANALYZER_PROJECT_LIST_H
-#include "../Paramcommand.h"
 #include "Icommand.h"
-#include "../ImanageDna.h"
 
 
-class List:public ControlCommands
+class List:public IcontrolCommands
 {
     public:
         /*virtual*/~List(){}

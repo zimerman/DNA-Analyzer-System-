@@ -3,7 +3,7 @@
 #include "Icommand.h"
 
 
-class Count:public SequenceAnalysis
+class Count:public IsequenceAnalysis
 {
     public:
         /*virtual*/~Count(){};

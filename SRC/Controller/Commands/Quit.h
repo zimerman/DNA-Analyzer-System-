@@ -1,10 +1,9 @@
 #ifndef DNA_ANALYZER_PROJECT_QUIT_H
 #define DNA_ANALYZER_PROJECT_QUIT_H
-#include "../Paramcommand.h"
 #include "Icommand.h"
 
 
-class Quit:public ControlCommands
+class Quit:public IcontrolCommands
 {
     public:
         /*virtual*/~Quit(){}

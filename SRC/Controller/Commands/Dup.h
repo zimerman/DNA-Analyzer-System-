@@ -3,7 +3,7 @@
 #include "Icommand.h"
 
 
-class Dup:public Icommand
+class Dup:public Icreate
 {
     public:
         /*virtual*/~Dup(){}

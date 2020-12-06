@@ -12,7 +12,7 @@ class StatusDna
         void setStatus(const std::string& status, size_t id);
         static std::vector<std::string>& getListStatus();
         static std::string& getStatus(size_t idDna);
-private:
+    private:
         std::string m_status;
         static std::vector<std::string> m_statuslist;
 };
