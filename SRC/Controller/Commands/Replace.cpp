@@ -8,7 +8,7 @@ Dnasequence Replace::replace(const std::vector<std::string>& param,size_t lastIn
 
     for(size_t index = 2; index < lastIndex;index += 2)
     {
-        newDnaseq.getAsCharNonConst()[castToSize(param[index])] = param[index+1][0];
+        newDnaseq[castToSize(param[index])] = param[index+1][0];
     }
 
     return newDnaseq;
